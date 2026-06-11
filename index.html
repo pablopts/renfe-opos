@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#7B1F5E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Andén 1">
+<link rel="manifest" href="manifest.json">
+<title>Andén 1 · Operador Comercial N2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --m:#7B1F5E;--md:#5E1748;
+  --b1:#8B1A4A;--b2:#1D4ED8;--b3:#C2410C;--b4:#0D9488;--b5:#4F46E5;--bp:#7C3AED;
+  --cream:#F4EFE6;--dark:#1C1C2E;--gold:#C8960A;
+  --gray:#6B7280;--gl:#E5E7EB;
+  --green:#15803D;--orange:#C2410C;--blue:#1D4ED8;
+  --sb:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--cream);color:var(--dark);overscroll-behavior:none}
+#app{height:100%;display:flex;flex-direction:column}
+.hdr{background:var(--dark);color:#fff;padding:0 1rem;height:56px;display:flex;align-items:center;
+  justify-content:space-between;flex-shrink:0;border-bottom:3px solid var(--m);z-index:50}
+.hdr-logo{display:flex;align-items:center;gap:10px}
+.hdr-badge{background:var(--m);font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;padding:3px 10px;letter-spacing:1px}
+.hdr-sub{font-size:.65rem;font-weight:300;color:#999;letter-spacing:2px;text-transform:uppercase}
+.hdr-nav{display:flex;gap:5px;align-items:center}
+.hdr-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:#ccc;padding:5px 9px;
+  border-radius:4px;cursor:pointer;font-size:.72rem;transition:all .2s;font-family:inherit}
+.hdr-btn:hover,.hdr-btn.on{background:var(--m);border-color:var(--m);color:#fff}
+.dot{width:7px;height:7px;border-radius:50%;background:#555}
+.dot.on{background:#22C55E;box-shadow:0 0 5px #22C55E}
+.screen{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:6px;
+  cursor:pointer;font-family:inherit;font-weight:600;font-size:.9rem;padding:11px 18px;transition:all .2s}
+.btn-p{background:var(--m);color:#fff}.btn-p:hover{background:var(--md)}.btn-p:active{transform:scale(.97)}
+.btn-s{background:transparent;color:var(--dark);border:2px solid var(--dark)}.btn-s:hover{background:var(--dark);color:#fff}
+.btn-g{background:transparent;color:var(--gray);border:1.5px solid var(--gl)}.btn-g:hover{border-color:var(--dark);color:var(--dark)}
+.btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+.btn-sm{padding:7px 12px;font-size:.78rem}
+.inst{background:var(--dark);color:#fff;padding:.65rem 1rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.inst-t{font-size:.8rem;flex:1;line-height:1.4}
+.inst-x{background:transparent;border:none;color:#aaa;cursor:pointer;font-size:1rem;padding:2px 6px}
+/* ── APP LAYOUT ── */
+#app{height:100%;display:flex;flex-direction:column}
+.screen{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+
+/* ── HOME ── */
+.home{display:flex;flex-direction:column;height:100%;box-sizing:border-box}
+
+.anden-header{text-align:center;padding:2.4rem 1.5rem 1rem;flex-shrink:0}
+.anden-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;
+  color:#8B1A4A;letter-spacing:-1px;line-height:1;margin-bottom:.4rem}
+body.dark .anden-title{color:#D49AC4}
+.anden-tagline{font-size:.9rem;color:#6B7280;letter-spacing:.3px}
+body.dark .anden-tagline{color:#9CA3AF}
+
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;
+  padding:0 1.25rem .9rem;flex-shrink:0}
+.kpi{background:#fff;border-radius:10px;padding:.8rem .5rem;
+  text-align:center;border:1px solid #E5E7EB}
+body.dark .kpi{background:#1C1C2E;border-color:#2D2D45}
+.kpi-n{font-family:'Playfair Display',serif;font-size:1.5rem;
+  color:#8B1A4A;line-height:1}
+body.dark .kpi-n{color:#D49AC4}
+.kpi-l{color:#6B7280;font-size:.65rem;margin-top:4px}
+
+.modes-grid{display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;gap:.85rem;
+  padding:0 1.25rem 1.25rem;flex:1}
+.mode-card{border:none;border-radius:16px;cursor:pointer;
+  transition:transform .2s,filter .2s;color:#fff;
+  padding:1rem;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.55rem;
+  width:100%;height:100%;box-sizing:border-box;
+  -webkit-appearance:none;appearance:none}
+.mode-card:hover{transform:translateY(-3px);filter:brightness(1.1)}
+.mode-card:active{transform:scale(.96)}
+.mode-card svg{display:block;width:52px;height:52px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));flex-shrink:0}
+.mode-title{font-weight:700;font-size:.92rem;color:#fff;
+  text-align:center;margin:0;line-height:1.2}
+.mode-sub{font-size:.66rem;color:rgba(255,255,255,.85);
+  text-align:center;margin:0;line-height:1.35}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{display:flex;justify-content:center;align-items:center;
+  gap:1rem;padding:.75rem 1.25rem calc(.75rem + env(safe-area-inset-bottom,0px));
+  background:#F4EFE6;border-top:1px solid #E5E7EB;flex-shrink:0}
+body.dark .bottom-nav{background:#0F0F1A;border-color:#2D2D45}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:4px;background:#fff;border:1.5px solid #E5E7EB;
+  border-radius:14px;cursor:pointer;transition:all .2s;font-family:inherit;
+  width:72px;height:72px;box-sizing:border-box;-webkit-appearance:none}
+body.dark .bnav-btn{background:#1C1C2E;border-color:#2D2D45}
+.bnav-btn:hover,.bnav-btn.on{border-color:#8B1A4A;background:#F9F0FF}
+body.dark .bnav-btn:hover,body.dark .bnav-btn.on{background:#2D1F3D}
+.bnav-icon{font-size:1.55rem;line-height:1}
+.bnav-lbl{font-size:.6rem;color:#6B7280;font-weight:600;white-space:nowrap}
+body.dark .bnav-lbl{color:#9CA3AF}
+.bnav-btn.on .bnav-lbl{color:#8B1A4A}
+body.dark .bnav-btn.on .bnav-lbl{color:#D49AC4}
+
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:6px;
+  cursor:pointer;font-family:inherit;font-weight:600;font-size:.9rem;padding:11px 18px;transition:all .2s}
+.btn-p{background:var(--m);color:#fff}.btn-p:hover{background:var(--md)}.btn-p:active{transform:scale(.97)}
+.btn-s{background:transparent;color:var(--dark);border:2px solid var(--dark)}.btn-s:hover{background:var(--dark);color:#fff}
+.btn-g{background:transparent;color:var(--gray);border:1.5px solid var(--gl)}.btn-g:hover{border-color:var(--dark);color:var(--dark)}
+.btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+.btn-sm{padding:7px 12px;font-size:.78rem}
+body.dark .btn-s{color:#E5E7EB;border-color:#6B7280}
+body.dark .btn-g{color:#9CA3AF;border-color:#2D2D45}
+
+/* ── INSTALL BAR ── */
+.inst{background:var(--dark);color:#fff;padding:.65rem 1rem;display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.inst-t{font-size:.8rem;flex:1;line-height:1.4}
+.inst-x{background:transparent;border:none;color:#aaa;cursor:pointer;font-size:1rem;padding:2px 6px}
+
+/* ── QUIZ ── */
+.quiz{padding:1rem;max-width:720px;margin:0 auto}
+.quiz-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;gap:.5rem}
+.quiz-meta{flex:1;min-width:0}
+.quiz-blk{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--m);margin-bottom:2px}
+.quiz-sub{font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.2}
+body.dark .quiz-sub{color:#E5E7EB}
+.timer{background:var(--dark);color:#fff;padding:5px 9px;border-radius:4px;
+  font-weight:700;font-size:.83rem;white-space:nowrap;font-family:monospace;flex-shrink:0}
+.timer.warn{background:#C2410C}.timer.danger{background:var(--m);animation:tpulse 1s infinite}
+@keyframes tpulse{0%,100%{opacity:1}50%{opacity:.6}}
+.prog-wrap{margin-bottom:.75rem}
+.prog-bar{height:4px;background:var(--gl);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--m);transition:width .3s}
+.prog-txt{display:flex;justify-content:space-between;font-size:.7rem;color:var(--gray);margin-top:4px}
+.q-card{background:#fff;border-radius:12px;padding:1.2rem;margin-bottom:.65rem;
+  border:1px solid var(--gl);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+body.dark .q-card{background:#1C1C2E;border-color:#2D2D45}
+.q-num{color:var(--m);font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
+.q-src{background:var(--gl);color:var(--gray);font-size:.6rem;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:6px}
+.q-text{font-size:.97rem;font-weight:500;line-height:1.55;margin-bottom:.9rem}
+body.dark .q-text{color:#E5E7EB}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:9px;background:var(--cream);border:2px solid transparent;
+  border-radius:8px;padding:10px 13px;cursor:pointer;font-family:inherit;font-size:.87rem;
+  line-height:1.4;text-align:left;transition:all .15s;width:100%}
+body.dark .opt{background:#252538;color:#E5E7EB}
+.opt:hover:not(:disabled){border-color:var(--m);background:#fff}
+body.dark .opt:hover:not(:disabled){background:#2D2D45}
+.opt.sel{border-color:var(--dark);background:#fff}
+.opt.ok{border-color:#15803D;background:#F0FDF4;color:#15803D}
+.opt.ko{border-color:var(--m);background:#FDF2F8;color:#5E1748}
+.opt:disabled{cursor:default}
+.opt-l{width:22px;height:22px;border-radius:50%;background:var(--gl);display:flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:.7rem;flex-shrink:0;margin-top:1px}
+.opt.sel .opt-l{background:var(--dark);color:#fff}
+.opt.ok .opt-l{background:#15803D;color:#fff}
+.opt.ko .opt-l{background:var(--m);color:#fff}
+.expl{background:#EFF6FF;border-left:4px solid #1D4ED8;border-radius:0 8px 8px 0;
+  padding:.9rem;margin-top:.65rem;font-size:.82rem;line-height:1.6;color:#1E3A8A}
+.expl strong{display:block;margin-bottom:3px;font-size:.74rem;text-transform:uppercase;letter-spacing:.5px}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;
+  padding:.85rem 1rem;background:var(--cream);border-top:1px solid var(--gl);
+  flex-shrink:0;padding-bottom:calc(.85rem + var(--sb))}
+body.dark .quiz-nav{background:#0F0F1A;border-color:#2D2D45}
+.sec-hd{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:.85rem;color:var(--dark)}
+body.dark .sec-hd{color:#E5E7EB}
+
+/* ── LOADER ── */
+.loader{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100%;gap:.85rem;color:var(--gray);padding:2rem;text-align:center}
+.spin{width:38px;height:38px;border:3px solid var(--gl);border-top-color:var(--m);
+  border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-t{font-weight:600;font-size:.95rem;color:var(--dark)}
+body.dark .loader-t{color:#E5E7EB}
+
+/* ── BLOQUES ── */
+.bloque{margin-bottom:.85rem}
+.blk-hdr{display:flex;align-items:center;gap:.65rem;padding:.85rem 1rem;border-radius:10px;
+  background:#fff;border:1px solid var(--gl);cursor:pointer;transition:all .2s}
+body.dark .blk-hdr{background:#1C1C2E;border-color:#2D2D45}
+.blk-hdr:hover{box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.blk-num{width:28px;height:28px;border-radius:50%;color:#fff;font-size:.78rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.blk-info{flex:1}
+.blk-title{font-weight:600;font-size:.88rem;line-height:1.3}
+body.dark .blk-title{color:#E5E7EB}
+.blk-sub{font-size:.7rem;color:var(--gray);margin-top:2px}
+.blk-arr{color:var(--gray);transition:transform .25s;font-size:.85rem}
+.blk-arr.open{transform:rotate(90deg)}
+.subs-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:.6rem .5rem 0}
+.sub-card{background:#fff;border-radius:8px;padding:.85rem;cursor:pointer;
+  border:1px solid var(--gl);border-left:3px solid var(--bc,var(--m));transition:all .2s}
+body.dark .sub-card{background:#1C1C2E;border-color:#2D2D45}
+.sub-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.sub-card:active{transform:scale(.97)}
+.sc-icon{font-size:1.1rem;margin-bottom:.3rem}
+.sc-name{font-weight:600;font-size:.76rem;line-height:1.3}
+body.dark .sc-name{color:#E5E7EB}
+.sc-desc{font-size:.64rem;color:var(--gray);margin-top:2px;line-height:1.35}
+
+/* ── RESULTS ── */
+.results{padding:1.25rem;max-width:720px;margin:0 auto}
+.res-hero{background:var(--dark);border-radius:14px;padding:1.75rem;text-align:center;color:#fff;margin-bottom:1.1rem}
+.res-score{font-family:'Playfair Display',serif;font-size:4.5rem;color:#C8960A;line-height:1}
+.res-lbl{color:#999;font-size:.82rem;margin-top:.2rem}
+.res-verd{font-size:1rem;font-weight:600;margin-top:.6rem}
+.res-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem;margin-top:.9rem}
+.rs{text-align:center}
+.rs-n{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700}
+.rs-l{font-size:.7rem;color:#aaa}
+.cg{color:#4ADE80}.cr{color:#F87171}.cs{color:#94A3B8}
+.rev-list{display:flex;flex-direction:column;gap:.65rem}
+.rev-item{background:#fff;border-radius:8px;padding:.9rem .9rem .9rem 1.1rem;
+  border:1px solid var(--gl);border-left:4px solid var(--ac,var(--gl))}
+body.dark .rev-item{background:#1C1C2E;border-color:#2D2D45}
+.rev-q{font-weight:500;font-size:.87rem;margin-bottom:.4rem;line-height:1.4}
+body.dark .rev-q{color:#E5E7EB}
+.rev-a{font-size:.8rem}
+
+/* ── STATS ── */
+.stats-pg{padding:1.25rem;max-width:720px;margin:0 auto}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.25rem}
+.big-s{background:#fff;border-radius:8px;padding:1.1rem;text-align:center;border:1px solid var(--gl)}
+body.dark .big-s{background:#1C1C2E;border-color:#2D2D45}
+.big-n{font-family:'Playfair Display',serif;font-size:2.1rem;color:var(--m)}
+.big-l{color:var(--gray);font-size:.72rem;margin-top:2px}
+.tbl{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;
+  overflow:hidden;border:1px solid var(--gl);font-size:.83rem}
+body.dark .tbl{background:#1C1C2E;border-color:#2D2D45}
+.tbl th{background:var(--dark);color:#fff;padding:9px 11px;text-align:left;font-weight:500;font-size:.75rem}
+.tbl td{padding:9px 11px;border-bottom:1px solid var(--gl)}
+body.dark .tbl td{border-color:#2D2D45;color:#E5E7EB}
+.tbl tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:.7rem;font-weight:600}
+.bg{background:#D1FAE5;color:#15803D}.bo{background:#FEF3C7;color:#C2410C}.br{background:#FEE2E2;color:var(--m)}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;
+  display:flex;align-items:flex-end;justify-content:center}
+.modal{background:#fff;border-radius:20px 20px 0 0;padding:1.5rem;width:100%;
+  max-width:600px;max-height:90vh;overflow-y:auto;
+  padding-bottom:calc(1.5rem + var(--sb))}
+body.dark .modal{background:#1C1C2E}
+.modal-t{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem}
+body.dark .modal-t{color:#E5E7EB}
+.modal-sec{margin-bottom:1rem}
+.modal-lbl{font-weight:600;font-size:.8rem;margin-bottom:.5rem}
+body.dark .modal-lbl{color:#E5E7EB}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{border:1.5px solid var(--gl);border-radius:20px;padding:4px 10px;font-size:.75rem;
+  cursor:pointer;transition:all .15s;background:#fff;font-family:inherit}
+body.dark .chip{background:#252538;border-color:#2D2D45;color:#E5E7EB}
+.chip.on{border-color:var(--m);background:var(--m);color:#fff}
+.num-row{display:flex;align-items:center;gap:.85rem}
+.num-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gl);
+  background:#fff;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;
+  justify-content:center;transition:all .15s}
+.num-btn:hover{border-color:var(--m);color:var(--m)}
+.num-v{font-size:1.15rem;font-weight:700;min-width:30px;text-align:center}
+body.dark .num-v{color:#E5E7EB}
+.modal-act{display:flex;gap:.65rem;justify-content:flex-end;margin-top:1rem}
+
+/* ── PHASE BAR (simulacro real) ── */
+.phase-bar{display:flex;align-items:center;gap:.65rem;padding:.65rem 1rem;
+  background:var(--dark);color:#fff;flex-shrink:0;font-size:.78rem}
+.phase-pill{background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;
+  font-weight:700;font-size:.72rem;white-space:nowrap}
+.phase-pill.active{background:var(--m);color:#fff}
+
+/* ── PHASE END ── */
+.phase-end{max-width:500px;margin:0 auto;padding:2rem 1.25rem;text-align:center}
+.phase-end-icon{font-size:3.5rem;margin-bottom:1rem}
+.phase-end-title{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.5rem}
+body.dark .phase-end-title{color:#E5E7EB}
+.phase-end-sub{color:var(--gray);font-size:.9rem;margin-bottom:1.5rem;line-height:1.5}
+.phase-result{background:#fff;border-radius:10px;padding:1.1rem;
+  border:1px solid var(--gl);margin-bottom:.75rem}
+body.dark .phase-result{background:#1C1C2E;border-color:#2D2D45}
+.phase-result-hd{display:flex;align-items:center;gap:.65rem;margin-bottom:.65rem}
+.phase-result-icon{font-size:1.25rem}
+.phase-result-name{font-weight:600;font-size:.88rem}
+body.dark .phase-result-name{color:#E5E7EB}
+.phase-result-score{font-family:'Playfair Display',serif;font-size:1.8rem;
+  color:var(--m);margin-left:auto}
+
+/* ── BY BLOQUE ── */
+.bybloque-page{padding:1.25rem;max-width:720px;margin:0 auto}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);
+  background:#1C1C2E;color:#fff;padding:.75rem 1.25rem;border-radius:8px;
+  font-size:.85rem;font-weight:600;z-index:300;border:2px solid var(--m);
+  animation:toastIn .3s ease;pointer-events:none;text-align:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);max-width:90vw}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-10px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ── REVISION ── */
+.rev-mode-empty{text-align:center;padding:3rem 1rem;color:var(--gray)}
+
+@media(min-width:580px){
+  .subs-grid{grid-template-columns:repeat(3,1fr)}
+  .sg{grid-template-columns:repeat(4,1fr)}
+  .overlay{align-items:center}
+  .modal{border-radius:14px;max-height:80vh}
+}
+
+
+/* ── DARK TOGGLE TOP-RIGHT ── */
+.anden-header{position:relative}
+.dark-toggle{
+  position:absolute;top:0;right:0;
+  background:transparent;border:none;
+  font-size:1.4rem;cursor:pointer;
+  padding:.5rem;border-radius:50%;
+  transition:transform .2s;
+  line-height:1;
+}
+.dark-toggle:hover{transform:scale(1.15)}
+
+/* ── BOTTOM TABS (2 tabs, always visible) ── */
+.bottom-tabs{
+  display:flex;justify-content:space-around;align-items:center;
+  padding:.5rem .5rem calc(.5rem + env(safe-area-inset-bottom,0px));
+  background:#F4EFE6;border-top:1px solid #E5E7EB;flex-shrink:0;
+}
+body.dark .bottom-tabs{background:#0F0F1A;border-color:#2D2D45}
+.tab-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:transparent;border:none;cursor:pointer;font-family:inherit;
+  padding:.45rem .6rem;border-radius:10px;transition:all .2s;flex:1;
+}
+.tab-btn:hover,.tab-btn.on{background:rgba(139,26,74,.08)}
+body.dark .tab-btn:hover,body.dark .tab-btn.on{background:rgba(212,154,196,.1)}
+.tab-icon{font-size:1.4rem;line-height:1;display:block}
+.tab-lbl{font-size:.6rem;color:#6B7280;font-weight:600;white-space:nowrap}
+body.dark .tab-lbl{color:#9CA3AF}
+.tab-btn.on .tab-lbl{color:#8B1A4A}
+body.dark .tab-btn.on .tab-lbl{color:#D49AC4}
+.tab-btn.on .tab-icon{filter:drop-shadow(0 0 4px rgba(139,26,74,.4))}
+
+/* ── HORIZONTAL SHORTCUT SCROLL ── */
+.shortcuts-scroll{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding:0 1.25rem .9rem;
+  flex-shrink:0;
+}
+.shortcuts-scroll::-webkit-scrollbar{display:none}
+.shortcut-track{
+  display:flex;gap:.65rem;
+  width:max-content;
+}
+.shortcut-card{
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  background:#fff;border:1.5px solid #E5E7EB;border-radius:14px;
+  padding:.85rem .75rem;cursor:pointer;transition:all .2s;
+  font-family:inherit;min-width:72px;
+  -webkit-appearance:none;
+}
+body.dark .shortcut-card{background:#1C1C2E;border-color:#2D2D45}
+.shortcut-card:hover{border-color:#8B1A4A;transform:translateY(-2px)}
+.shortcut-card:active{transform:scale(.95)}
+.shortcut-icon{font-size:1.5rem;line-height:1}
+.shortcut-lbl{font-size:.65rem;font-weight:600;color:#374151;white-space:nowrap}
+body.dark .shortcut-lbl{color:#D1D5DB}
+
+/* ── DARK MODE BACKGROUND ── */
+body.dark{background:#0F0F1A}
+body.dark .screen{background:#0F0F1A}
+body{background:#F4EFE6}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const BLOQUES=[
+  {id:'B1',num:1,color:'var(--b1)',icon:'🎟️',
+   title:'Actividad Comercial en el Transporte Ferroviario de Viajeros',
+   subs:[
+    {id:'B1S1',icon:'📋',name:'Condiciones Generales de Transporte',desc:'Títulos de transporte, validez, viaje sin título, menores sin acompañante'},
+    {id:'B1S2',icon:'🛒',name:'Normativa Comercial',desc:'AVLO · Combinado Cercanías · +Renfe · Salas Club · Menores · Tarjeta Dorada · Pase Vía · FIP · Posventa'},
+    {id:'B1S3',icon:'🌍',name:'Pases Internacionales',desc:'Eurail · Interrail · Spain Rail Pass · Acuerdo de Continuación de Viaje (AJC)'},
+  ]},
+  {id:'B2',num:2,color:'var(--b2)',icon:'⚖️',
+   title:'II Plan de Igualdad de Género del Grupo Renfe',
+   subs:[
+    {id:'B2S1',icon:'🏢',name:'Grupo Renfe y Compromiso con la Igualdad',desc:'Introducción, estructura del Grupo, compromiso, vínculos con Plan Estratégico y ODS'},
+    {id:'B2S2',icon:'🔍',name:'Diagnóstico de Situación',desc:'Diagnóstico por empresa, análisis de plantilla, igualdad por materia, encuesta'},
+    {id:'B2S3',icon:'💰',name:'Auditoría Retributiva y Registro Salarial',desc:'Metodología, registro retributivo, valoración de puestos, brecha salarial, planes de actuación'},
+    {id:'B2S4',icon:'🛡️',name:'Protocolo contra el Acoso',desc:'Protocolo acoso sexual, por razón de sexo y acoso moral. Prevención y procedimiento'},
+    {id:'B2S5',icon:'📈',name:'Estructura, Acciones y Sistema de Gestión',desc:'Áreas de acción, medidas, sistema de gestión, gobernanza, seguimiento y evaluación'},
+  ]},
+  {id:'B3',num:3,color:'var(--b3)',icon:'🦺',
+   title:'Libro Blanco de la Cultura de Seguridad Operacional',
+   subs:[
+    {id:'B3S1',icon:'🎯',name:'Por qué revisar la Cultura de Seguridad',desc:'Cambios en el sector ferroviario: reparto de responsabilidades, enfoque preventivo, legislación UE'},
+    {id:'B3S2',icon:'🔗',name:'Cultura de Seguridad y SGS',desc:'Definición SGS, relación con Cultura de Seguridad, madurez organizacional, Reglamento UE 2018/762'},
+    {id:'B3S3',icon:'🏛️',name:'Modelo de Cultura de Seguridad Renfe',desc:'Principios del modelo, Just Culture, comportamientos seguros, pilares de la cultura'},
+    {id:'B3S4',icon:'🔄',name:'Plan de Transformación de la Cultura',desc:'Objetivos, alineamiento cultural, colectivos implicados, fases del plan'},
+  ]},
+  {id:'B4',num:4,color:'var(--b4)',icon:'⭐',
+   title:'Nociones Básicas de Experiencia de Cliente en el Grupo Renfe',
+   subs:[
+    {id:'B4S1',icon:'💡',name:'Introducción a la Experiencia de Cliente',desc:'Definición, diferencia con Atención al Cliente, importancia, evolución histórica'},
+    {id:'B4S2',icon:'🧩',name:'Fundamentos de la Experiencia de Cliente',desc:'Elementos clave, ciclo de vida del cliente, factores: empatía, personalización, comunicación'},
+    {id:'B4S3',icon:'🗺️',name:'Diseño y Gestión de la Experiencia de Cliente',desc:'Pasillo del cliente, arquetipos, Blueprint, herramientas de gestión, KPIs de CX'},
+    {id:'B4S4',icon:'🤝',name:'Cultura de Servicio y Orientación al Cliente',desc:'Cultura centrada en el cliente, habilidades y competencias para la CX'},
+    {id:'B4S5',icon:'📱',name:'CX Digital, Fidelización y Resolución',desc:'Experiencia digital, IA en CX, resolución de problemas, gestión de reclamaciones, fidelización'},
+  ]},
+  {id:'B5',num:5,color:'var(--b5)',icon:'🚄',
+   title:'Conocimientos Básicos Ferroviarios',
+   subs:[
+    {id:'B5S1',icon:'📜',name:'El Sistema Ferroviario e Historia',desc:'Fundamento técnico, historia del ferrocarril, RENFE, Alta Velocidad en España'},
+    {id:'B5S2',icon:'🇪🇺',name:'Marco Normativo Europeo y Español',desc:'Paquetes Ferroviarios, ETIs, ERA, legislación española, ADIF, CNMC, CIAF, Ley 39/2003'},
+    {id:'B5S3',icon:'🗺️',name:'La RFIG: Red Ferroviaria de Interés General',desc:'Concepto, catálogo de líneas, planificación, administración, extensión de la red'},
+    {id:'B5S4',icon:'🛤️',name:'Infraestructura, Vía y Energía',desc:'Trazado, balasto, vía en placa, carril, traviesas, desvíos, ancho de vía, electrificación'},
+    {id:'B5S5',icon:'🚃',name:'Material Rodante',desc:'Material motor eléctrico/diésel/dual, material remolcado, cabina de conducción, frenado'},
+    {id:'B5S6',icon:'🔴',name:'Control, Mando y Señalización',desc:'Detección, enclavamiento, bloqueo, señales, ASFA, LZB, ETCS, GSM-R'},
+    {id:'B5S7',icon:'⚙️',name:'Explotación y Gestión del Tráfico',desc:'Principios de circulación, gráfico de marchas, documentación, maniobras, personal operativo'},
+  ]},
+];
+const PSICO_SUBS=[
+  {id:'PS1',icon:'🔢',name:'Series Numéricas',desc:'Suma, resta, multiplicación, potencias, series alternadas'},
+  {id:'PS2',icon:'📝',name:'Aptitud Verbal',desc:'Sinónimos, antónimos y analogías verbales'},
+  {id:'PS3',icon:'🔷',name:'Razonamiento Abstracto',desc:'Matrices lógicas, series de figuras, razonamiento espacial'},
+];
+
+const QB={
+B1S1:[
+  {q:"¿A qué servicios de Renfe Viajeros aplican las Condiciones Generales de Transporte?",
+   o:["Solo AVE, Alvia y Avant en ancho ibérico","Solo a los servicios de Alta Velocidad comerciales","A todos los servicios: AV-LD, LD, AV-MD, MD y Cercanías en ambos anchos","Solo a los servicios sujetos a Obligación de Servicio Público"],c:2,
+   e:"Las CGT aplican a todos los servicios: Alta Velocidad-Larga Distancia, Larga Distancia, AV-Media Distancia, Media Distancia y Cercanías, en ancho ibérico y métrico."},
+  {q:"¿Con cuánta antelación debe presentarse el menor para el servicio 'Viaje Sin Acompañante'?",
+   o:["60 minutos antes de la salida del tren","30 minutos antes de la salida del tren","15 minutos antes de la salida del tren","45 minutos antes de la salida del tren"],c:3,
+   e:"El menor y el adulto responsable deben presentarse 45 minutos antes en el Centro de Servicios o taquillas de la estación."},
+  {q:"¿Cuándo se considera 'no válido' un título de transporte de Renfe?",
+   o:["Cuando se compró con más de 30 días de antelación","Cuando no se ha efectuado su formalización o validación obligatoria","Cuando el precio abonado fue inferior al tarificado","Cuando se adquirió por un canal no oficial de Renfe"],c:1,
+   e:"El título es no válido cuando no se ha efectuado su formalización o validación, obligatoria en todos los servicios de Renfe Viajeros."},
+  {q:"¿Admiten cambios los títulos de transporte de Cercanías según las CGT?",
+   o:["Sí, hasta 10 minutos antes de la salida","No, los títulos de Cercanías no admiten cambios","Sí, abonando la diferencia tarifaria correspondiente","Sí, pero solo si se solicitan en la estación de origen"],c:1,
+   e:"Las CGT establecen que los títulos de los servicios de Cercanías no admiten cambios bajo ninguna circunstancia."},
+  {q:"¿Qué documento actúa como autorización para el viaje de un menor sin acompañante?",
+   o:["El billete del tren debidamente sellado por el personal","El pasaporte o DNI del menor con foto actualizada","El documento 'Viaje de menores sin acompañante' firmado por el responsable","Una declaración responsable firmada ante el jefe de estación"],c:2,
+   e:"La firma del documento específico 'Viaje de menores sin acompañante' se considera la autorización válida para que el menor realice el viaje."},
+  {q:"¿En qué servicios las anulaciones solo se admiten en el momento de la compra?",
+   o:["En los servicios de Alta Velocidad en temporada alta","En los servicios de Larga Distancia con tarifa básica","En los servicios de Cercanías sin excepción alguna","En los servicios Avant con tarifa no flexible"],c:2,
+   e:"Las CGT establecen que en los servicios de Cercanías las anulaciones solo se admiten en el momento de la compra, a diferencia de otros servicios con mayor flexibilidad de posventa."},
+  {q:"¿Con cuánta antelación debe el adulto entregar al menor al personal del tren?",
+   o:["30 minutos antes de la salida del servicio","45 minutos antes de la salida del servicio","15 minutos antes de la salida del servicio","En el momento exacto del embarque al tren"],c:2,
+   e:"El responsable debe entregar al menor al personal de check-in o supervisión 15 minutos antes de la salida del tren."},
+  {q:"¿Cuál puede motivar la inadmisión de un viajero según las Condiciones Generales?",
+   o:["Llevar equipaje de dimensiones superiores a las permitidas","Comportamiento que altere el orden o ponga en riesgo la seguridad","No presentar el billete impreso en papel físico","Viajar sin reserva de plaza en un servicio de Media Distancia"],c:1,
+   e:"Las CGT contemplan inadmisión por razones de seguridad, comportamiento que altere el orden o ponga en riesgo a otros viajeros, o situaciones de aforo completo."},
+],
+B1S2:[
+  {q:"¿Qué caracteriza principalmente al servicio AVLO de Renfe?",
+   o:["Es el servicio nocturno de alta velocidad entre Madrid y Barcelona","Es el servicio de alta velocidad premium con mayor nivel de servicios","Es el servicio de alta velocidad de bajo coste con condiciones comerciales específicas","Es el servicio internacional de alta velocidad con Francia y Portugal"],c:2,
+   e:"AVLO es el servicio de alta velocidad de bajo coste de Renfe, con tarifas más económicas y condiciones comerciales propias, incluyendo restricciones de equipaje y menor flexibilidad de posventa."},
+  {q:"¿Qué obtiene el cliente al comprar un billete AVE con el 'Combinado Cercanías'?",
+   o:["Un descuento del 30% en el siguiente billete de Cercanías","Un billete de Cercanías gratuito en origen y/o destino para acceder a la estación","Acceso gratuito a la Sala Club de la estación de destino","Prioridad de embarque y asignación de plaza preferente en el AVE"],c:1,
+   e:"El Combinado Cercanías permite obtener gratuitamente un billete de Cercanías tanto en origen como en destino al comprar un billete AVE o Larga Distancia."},
+  {q:"¿A qué colectivo va dirigida principalmente la Tarjeta Dorada de Renfe?",
+   o:["Empleados en activo del Grupo Renfe y sus familiares directos","Jóvenes universitarios menores de 26 años con carné vigente","Personas mayores de 60 años o pensionistas con acreditación","Viajeros frecuentes con más de 20 viajes anuales en AVE"],c:2,
+   e:"La Tarjeta Dorada está dirigida a personas mayores de 60 años o pensionistas, permitiéndoles obtener descuentos en los billetes de Renfe Viajeros."},
+  {q:"¿Qué es el programa '+Renfe'?",
+   o:["El seguro de viaje complementario contratado junto al billete","El programa de fidelización que permite acumular puntos por viaje canjeables por beneficios","El servicio de atención prioritaria para viajeros de primera clase","El sistema de reserva anticipada con descuento por antelación"],c:1,
+   e:"+Renfe es el programa de fidelización de Renfe Viajeros. Los clientes acumulan puntos con cada viaje, canjeables por descuentos, billetes gratuitos y otros beneficios del programa."},
+  {q:"¿Qué son las Salas Club de Renfe?",
+   o:["Los vagones de primera clase reformados del AVE de nueva generación","Las zonas de restauración exclusivas a bordo de los trenes Alvia","Espacios de espera exclusivos en estaciones para clientes habilitados","Las oficinas de atención personalizada para reclamaciones y posventa"],c:2,
+   e:"Las Salas Club son espacios exclusivos en determinadas estaciones para clientes que viajan en primera clase o que disponen de tarjeta habilitada para su acceso."},
+  {q:"¿Para quién está diseñado el Pase Vía de Renfe?",
+   o:["Para viajeros frecuentes con más de 50 trayectos anuales registrados","Para turistas extranjeros con residencia fuera de la Unión Europea","Para trabajadores del sector ferroviario en activo y sus beneficiarios","Para estudiantes universitarios con beca de movilidad nacional"],c:2,
+   e:"El Pase Vía es un título de transporte para trabajadores en activo, prejubilados y pensionistas de Renfe, ADIF y otras empresas del sector, así como sus familiares beneficiarios."},
+  {q:"¿Qué son los billetes y tarjetas FIP?",
+   o:["Billetes internacionales de alta velocidad a precio reducido para turistas","Títulos de transporte para personal ferroviario y beneficiarios por acuerdos de reciprocidad","Tarjetas de descuento para familias numerosas en trayectos de larga distancia","Títulos especiales para delegaciones gubernamentales y funcionarios del Estado"],c:1,
+   e:"Los billetes y tarjetas FIP (Formulaire d'Identité Professionnelle) son para el personal ferroviario internacional y sus beneficiarios, fruto de acuerdos de reciprocidad entre operadoras europeas."},
+  {q:"¿Qué condiciones aplica AVLO respecto al equipaje?",
+   o:["Permite el mismo equipaje que el AVE estándar sin restricciones adicionales","Restringe el equipaje de bodega pero no el equipaje de mano de cabina","Aplica condiciones más restrictivas en número y dimensiones de bultos","Solo permite un bulto de equipaje de mano de hasta 8 kilogramos"],c:2,
+   e:"AVLO, al ser un servicio de bajo coste, aplica condiciones de equipaje más restrictivas que el AVE convencional, con límites en número y tamaño de bultos permitidos."},
+],
+B1S3:[
+  {q:"¿Cuál es la diferencia fundamental entre Eurail e Interrail?",
+   o:["Eurail cubre más países europeos que el pase Interrail equivalente","Eurail es exclusivo para mayores de 60 años mientras Interrail es para jóvenes","Eurail es para residentes fuera de Europa; Interrail para residentes europeos","Eurail solo cubre alta velocidad; Interrail también trenes regionales"],c:2,
+   e:"Interrail está destinado a personas residentes en países europeos participantes; Eurail, a viajeros con residencia permanente fuera del área europea."},
+  {q:"¿Cuántos viajes permite el Spain Rail Pass de Renfe?",
+   o:["Viajes ilimitados durante un período de 15 días consecutivos","Un número fijo de 4, 6, 8 ó 10 viajes según la modalidad elegida","Viajes ilimitados durante un mes natural completo","Hasta 20 viajes en un período de tres meses desde la activación"],c:1,
+   e:"El Spain Rail Pass permite realizar 4, 6, 8 ó 10 viajes en trenes de Renfe Viajeros en función de la modalidad contratada al comprar el pase."},
+  {q:"¿Cuánto tiempo es válido el Spain Rail Pass desde su adquisición?",
+   o:["3 meses desde la fecha de compra del pase","12 meses desde la fecha de primera utilización","6 meses desde la fecha de adquisición del pase","1 mes desde la primera formalización de viaje"],c:2,
+   e:"El Spain Rail Pass tiene validez de 6 meses desde su adquisición. Desde la primera formalización, el cliente dispone de 1 mes para realizar los viajes contratados."},
+  {q:"¿Es obligatoria la formalización del viaje con el Spain Rail Pass?",
+   o:["No, el pase actúa como billete válido sin formalización previa","Solo en trenes AVE y Avant, no en Media Distancia ni Alvia","Sí, es obligatoria antes de cada trayecto en todos los servicios","Solo si el trayecto supera los 300 km o 2 horas de duración"],c:2,
+   e:"La formalización es obligatoria para cada trayecto. Puede hacerse en taquillas, web, agencias de viaje, venta telefónica o App de Renfe."},
+  {q:"¿Qué garantiza el Acuerdo de Continuación de Viaje (AJC)?",
+   o:["Precios especiales en trayectos internacionales de larga distancia","La devolución del billete si el retraso supera los 60 minutos","La continuidad del viaje internacional ante retrasos o cancelaciones que impidan el enlace","Asistencia hotelera gratuita cuando se pierde la conexión nocturna"],c:2,
+   e:"El AJC garantiza la continuidad del viaje a pasajeros internacionales afectados por retrasos o cancelaciones que impidan el enlace planificado entre operadoras."},
+  {q:"¿Forman parte del AJC las operadoras IRYO y OUIGO España?",
+   o:["Sí, ambas están plenamente adscritas al Acuerdo desde su inicio","Solo IRYO forma parte al operar servicios transfronterizos con Francia","No, porque solo operan en España y no cumplen el requisito de tráfico internacional","Solo OUIGO España está adscrita al AJC por su origen francés"],c:2,
+   e:"IRYO y OUIGO España no forman parte del AJC porque operan únicamente dentro de España, sin cumplir el requisito de ser operadoras de tráfico internacional transfronterizo."},
+  {q:"¿Para quién está diseñado el Spain Rail Pass?",
+   o:["Para cualquier viajero que quiera viajar por España en tren","Para residentes en países europeos que visitan España temporalmente","Para clientes con residencia permanente fuera de España","Para grupos de más de 10 personas que viajan juntas por España"],c:2,
+   e:"El Spain Rail Pass está dirigido a clientes con residencia permanente fuera de España, con precio diferenciado para adultos y niños."},
+],
+B2S1:[
+  {q:"¿Cuándo y mediante qué norma se creó RENFE?",
+   o:["En 1936 mediante Decreto de Incautación Ferroviaria del Estado","En 1955 mediante el Plan de Modernización del Ferrocarril Español","En 1941 mediante la Ley de Bases de Ordenación Ferroviaria y Transportes","En 1929 mediante el Estatuto Ferroviario durante la Dictadura de Primo de Rivera"],c:2,
+   e:"RENFE fue creada en 1941 mediante la Ley de Bases de Ordenación Ferroviaria para nacionalizar y unificar las compañías ferroviarias privadas deterioradas tras la Guerra Civil."},
+  {q:"¿Cuál es el objetivo principal del II Plan de Igualdad del Grupo Renfe?",
+   o:["Alcanzar la paridad exacta del 50% en todos los puestos directivos","Dar cumplimiento a la legislación y promover la igualdad efectiva entre hombres y mujeres","Eliminar todas las diferencias salariales en un plazo de dos años","Aumentar la contratación femenina en puestos técnicos y operativos"],c:1,
+   e:"El II Plan de Igualdad tiene como objetivo dar cumplimiento a la Ley Orgánica 3/2007 y continuar el compromiso del I Plan, garantizando la igualdad real entre mujeres y hombres en el Grupo Renfe."},
+  {q:"¿Qué sindicatos participaron en la elaboración del II Plan de Igualdad?",
+   o:["UGT y CC.OO. exclusivamente por ser los más representativos","SEMAF, CC.OO. y UGT desde la Mesa Técnica de Igualdad del Convenio","CGT, CNT y USO en representación del personal operativo de trenes","Solo el Comité de Empresa Estatal sin participación sindical externa"],c:1,
+   e:"El II Plan de Igualdad se elaboró con la participación de SEMAF, CC.OO. y UGT, que integran la Mesa Técnica de Igualdad y Aspectos Sociolaborales del II Convenio Colectivo del Grupo Renfe."},
+  {q:"¿Por qué hay mayor presencia masculina en los tramos de mayor antigüedad de Renfe?",
+   o:["Por una política histórica deliberada de contratación preferente de hombres","Porque el trabajo ferroviario era considerado incompatible con la maternidad","Porque la carrera militar, vía de entrada exclusivamente masculina, fue fuente histórica de incorporación","Porque las mujeres accedieron al ferrocarril solo tras la Ley de Igualdad de 2007"],c:2,
+   e:"La carrera militar fue históricamente una de las principales vías de entrada en Renfe y, al ser exclusivamente masculina, generó mayor presencia de hombres en los tramos de mayor antigüedad."},
+  {q:"¿Qué cláusula contempla el convenio de Renfe ante igualdad de puntuación en selección?",
+   o:["Preferencia al candidato con mayor antigüedad en listas de espera","Preferencia al candidato interno frente al candidato externo","Preferencia al género subrepresentado en esa categoría profesional","Elección por sorteo entre los candidatos que hayan empatado"],c:2,
+   e:"El convenio recoge preferencia al género subrepresentado cuando hay igualdad de puntuación, dejando de tener efecto al alcanzarse representación equilibrada entre ambos sexos."},
+  {q:"¿Qué empresas forman actualmente el Grupo Renfe?",
+   o:["Solo la EPE Renfe-Operadora como entidad pública única","Renfe Viajeros, ADIF y las Administraciones de Infraestructuras Regionales","La EPE Renfe-Operadora y sus Sociedades Mercantiles del Estado (Viajeros, Mercancías, Fabricación, Alquiler y Renfe of América)","Renfe Viajeros, Renfe Mercancías y Renfe Internacional como únicas filiales"],c:2,
+   e:"El Grupo Renfe está formado por la EPE Renfe-Operadora y sus Sociedades Mercantiles: Renfe Viajeros, Renfe Mercancías, Renfe Fabricación y Mantenimiento, Renfe Alquiler de Material Ferroviario y Renfe of América."},
+],
+B2S2:[
+  {q:"¿Qué debe recoger el registro retributivo obligatorio de una empresa?",
+   o:["Solo los salarios brutos anuales de toda la plantilla sin desgloses","Solo las retribuciones variables y complementos de productividad","Los valores medios de salarios y complementos desagregados por sexo y categoría","Solo las retribuciones de los puestos de dirección y mandos intermedios"],c:2,
+   e:"El registro retributivo debe recoger los valores medios de salarios, complementos salariales y percepciones extrasalariales de la plantilla, desagregados por sexo y clasificación profesional."},
+  {q:"¿Qué mide la brecha salarial de género?",
+   o:["La diferencia entre el salario del CEO y el salario mínimo de la empresa","El porcentaje de mujeres que cobran por debajo del salario mediano","La diferencia porcentual entre los salarios medios de hombres y mujeres","La diferencia entre la retribución fija y la retribución variable por sexo"],c:2,
+   e:"La brecha salarial es la diferencia porcentual entre los salarios medios de hombres y mujeres. Su identificación y reducción es uno de los objetivos clave del Plan de Igualdad de Renfe."},
+  {q:"¿Cuántas empresas del Grupo Renfe realizaron informe de diagnóstico en el II Plan?",
+   o:["Solo Renfe Operadora como entidad matriz del Grupo","Únicamente Renfe Viajeros y Renfe Mercancías por su mayor plantilla","EPE Renfe-Operadora, Renfe Viajeros, Renfe Mercancías, Renfe Fabricación y Renfe Alquiler","Todo el Grupo incluyendo Renfe of América y empresas participadas"],c:2,
+   e:"El II Plan incluye diagnósticos de: EPE Renfe-Operadora, Renfe Viajeros, Renfe Mercancías, Renfe Fabricación y Mantenimiento, y Renfe Alquiler de Material Ferroviario."},
+  {q:"¿Qué aspectos incluye el análisis de igualdad por materia en el diagnóstico?",
+   o:["Solo el análisis de la distribución de la plantilla por categoría y sexo","Únicamente los aspectos retributivos y de acceso al empleo externo","Acceso al empleo, clasificación, formación, conciliación, retribución y prevención de riesgos","Solo los aspectos de conciliación laboral y familiar de la plantilla"],c:2,
+   e:"El análisis de igualdad por materia examina: acceso al empleo, clasificación profesional, formación, promoción, condiciones de trabajo, retribución, conciliación y prevención de riesgos laborales."},
+],
+B2S3:[
+  {q:"¿Qué objetivo tiene la auditoría retributiva del Plan de Igualdad?",
+   o:["Reducir el coste salarial total optimizando la estructura de complementos","Detectar puestos con retribución superior a la media del sector ferroviario","Garantizar igualdad salarial por igual trabajo identificando y corrigiendo brechas","Establecer una retribución variable ligada a objetivos de igualdad"],c:2,
+   e:"La auditoría retributiva garantiza el principio de igualdad salarial por igual trabajo o trabajo de igual valor, identificando brechas y proponiendo planes de actuación para corregirlas."},
+  {q:"¿Qué determina la valoración de puestos de trabajo?",
+   o:["El salario exacto que debe percibir cada trabajador en su categoría","La productividad individual de cada empleado en su puesto concreto","El valor relativo de cada puesto con independencia de quien lo ocupe","El nivel de riesgo laboral asociado a cada puesto de trabajo"],c:2,
+   e:"La valoración de puestos determina el valor relativo de cada puesto mediante criterios objetivos (responsabilidad, esfuerzo, conocimientos, condiciones), garantizando igual retribución por trabajo de igual valor."},
+],
+B2S4:[
+  {q:"¿Qué tipos de acoso contempla el Protocolo de Renfe?",
+   o:["Solo el acoso sexual en sus modalidades física y verbal","Acoso laboral o mobbing y acoso discriminatorio por origen étnico","Acoso sexual, acoso por razón de sexo y acoso moral (mobbing)","Acoso sexual y ciberacoso en entornos digitales de trabajo"],c:2,
+   e:"El Protocolo de Renfe (aprobado el 10 de marzo de 2010) abarca: acoso sexual, acoso por razón de sexo y acoso moral o mobbing."},
+  {q:"¿Cuándo fue aprobado el Protocolo de Renfe contra el acoso?",
+   o:["15 de enero de 2007, coincidiendo con la Ley Orgánica de Igualdad","22 de octubre de 2012, en la primera revisión del Convenio Colectivo","10 de marzo de 2010, como parte del I Plan de Igualdad de Renfe","8 de marzo de 2019, en el Día Internacional de la Mujer Trabajadora"],c:2,
+   e:"El Protocolo fue aprobado por Resolución de 10 de marzo de 2010, como parte integrante del I Plan de Igualdad de Renfe."},
+  {q:"¿A qué tienen derecho los trabajadores de Renfe según el protocolo de acoso?",
+   o:["A recibir formación anual obligatoria en materia de prevención del acoso","A conocer la identidad del instructor en cualquier procedimiento abierto","A un entorno laboral libre de conductas hostiles o intimidatorias","A que su denuncia sea resuelta en un plazo máximo de 30 días hábiles"],c:2,
+   e:"El protocolo establece que todos los trabajadores y trabajadoras tienen derecho a un entorno laboral libre de conductas y comportamientos hostiles o intimidatorios hacia su persona."},
+  {q:"¿Qué distingue el acoso sexual del acoso por razón de sexo?",
+   o:["El acoso sexual es siempre físico; el acoso por razón de sexo puede ser verbal","El acoso sexual lo ejerce siempre un superior jerárquico; el otro puede ser entre iguales","El acoso sexual tiene componente sexual no deseado; el otro implica trato degradante por el sexo sin componente sexual necesario","El acoso sexual está tipificado penalmente; el acoso por razón de sexo solo en vía laboral"],c:2,
+   e:"El acoso sexual implica comportamientos de naturaleza sexual no deseados. El acoso por razón de sexo supone trato degradante vinculado al sexo de la persona, sin que necesariamente tenga componente sexual."},
+],
+B2S5:[
+  {q:"¿Cuáles son los ámbitos de acción del Plan de Igualdad de Renfe?",
+   o:["Solo retribución, selección y conciliación como ámbitos prioritarios","Únicamente formación, comunicación y protocolo contra el acoso","Acceso al Grupo, condiciones de trabajo, formación, conciliación, retribución y salud laboral","Solo los ámbitos exigidos por la Ley Orgánica de Igualdad de 2007"],c:2,
+   e:"Las áreas de acción incluyen: acceso al Grupo, condiciones de trabajo y carrera profesional, formación, comunicación, lenguaje no sexista, conciliación, retribución y salud laboral."},
+  {q:"¿Qué es la Mesa Técnica de Igualdad y Aspectos Sociolaborales (MTIASL)?",
+   o:["El departamento de RRHH encargado de aplicar el Plan de Igualdad","La comisión disciplinaria que tramita las denuncias por acoso laboral","El órgano de negociación y seguimiento del Plan, integrado por Renfe y los sindicatos","El comité externo de auditoría que verifica el cumplimiento del Plan"],c:2,
+   e:"La MTIASL es el órgano de negociación y seguimiento del Plan de Igualdad, integrado por la representación de la empresa y los sindicatos SEMAF, CC.OO. y UGT."},
+  {q:"¿Qué es el Observatorio de Igualdad de Género de Renfe?",
+   o:["El sistema de videovigilancia para detectar situaciones de acoso en el trabajo","La plataforma digital de formación en igualdad para toda la plantilla","Un instrumento de seguimiento del Plan que analiza indicadores y propone mejoras","El registro oficial de incidencias y denuncias por discriminación de género"],c:2,
+   e:"El Observatorio de Igualdad es un instrumento de gobernanza del Plan que realiza el seguimiento de los indicadores, analiza la evolución y propone medidas correctoras cuando sea necesario."},
+],
+B3S1:[
+  {q:"¿Qué cinco cambios motivan revisar la Cultura de Seguridad según el Libro Blanco?",
+   o:["Digitalización, nuevas flotas, privatización, competencia y normativa ISO","Cambios en clima, demografía, energía, materiales y tecnología de trenes","Reparto de responsabilidades, enfoque de seguridad, personas, tecnología de la información y legislación","Incorporación de ETCS, nuevas líneas, personal nuevo, IA y auditorías externas"],c:2,
+   e:"El Libro Blanco identifica: cambio en el reparto de responsabilidades, cambio en el enfoque de seguridad (preventivo), relevo generacional, nuevas tecnologías de la información y nueva legislación europea (4.º Paquete Ferroviario)."},
+  {q:"¿Qué implica el cambio en el 'reparto de responsabilidades' en seguridad ferroviaria?",
+   o:["Que cada maquinista asume ahora toda la responsabilidad de la seguridad","Que ADIF ha asumido todas las responsabilidades de seguridad que antes tenía Renfe","Que la seguridad pasó de una empresa a compartirse entre operadoras, gestores de infraestructura y mantenedores","Que las responsabilidades de seguridad han sido transferidas a la ERA europea"],c:2,
+   e:"Antes la seguridad estaba integrada en una sola empresa. Tras la liberalización, se reparte entre múltiples actores: empresas ferroviarias, ADIF, mantenedores y otros agentes del sistema."},
+  {q:"¿Qué supone el paso a un 'enfoque de seguridad preventivo' según el Libro Blanco?",
+   o:["Aumentar el número de inspecciones técnicas y auditorías de seguridad","Contratar más personal de seguridad privada en estaciones y trenes","Pasar de cumplir la norma reactivamente a gestionar el riesgo de forma anticipativa","Implementar cámaras de videovigilancia en todas las instalaciones ferroviarias"],c:2,
+   e:"El enfoque preventivo supone pasar de una seguridad reactiva (cumplir la norma) a una proactiva (gestión del riesgo), identificando y previniendo situaciones peligrosas antes de que se materialicen."},
+  {q:"¿Qué exige el Reglamento Delegado (UE) 2018/762 a las empresas ferroviarias?",
+   o:["La certificación ISO 9001 de todos sus procesos operativos y de mantenimiento","La implantación completa del ETCS nivel 2 en toda su flota de material rodante","La Cultura de Seguridad y evidencias de su aplicación como requisito obligatorio del SGS","La presentación de un informe anual de accidentes ante la Agencia ERA"],c:2,
+   e:"El Reglamento Delegado (UE) 2018/762 exige la Cultura de Seguridad y sus evidencias de aplicación como requisito obligatorio para los Sistemas de Gestión de Seguridad de las empresas ferroviarias."},
+],
+B3S2:[
+  {q:"¿Qué es un Sistema de Gestión de Seguridad (SGS) ferroviario?",
+   o:["El sistema informático de gestión de incidencias y averías del material rodante","El conjunto de cámaras y sensores para vigilar la seguridad en la infraestructura","El conjunto organizado de medidas y procedimientos para garantizar operaciones seguras","El departamento de seguridad y los inspectores de circulación de la empresa"],c:2,
+   e:"El SGS es el conjunto organizado de medidas, procedimientos y responsabilidades que establece una empresa ferroviaria para garantizar que sus operaciones cumplan los requisitos de seguridad."},
+  {q:"Según el Libro Blanco, ¿cuál es la relación entre SGS y Cultura de Seguridad?",
+   o:["Son dos sistemas independientes que operan en paralelo sin influirse mutuamente","El SGS es más importante porque es obligatorio por ley; la Cultura es voluntaria","El SGS dice cómo actuar, pero la Cultura de Seguridad determina el comportamiento real","La Cultura de Seguridad sustituye al SGS en organizaciones de alta madurez"],c:2,
+   e:"Según el Libro Blanco: el SGS nos dice cómo debemos actuar, pero es la Cultura de Seguridad la que determina nuestro comportamiento final. Ambos impactan en los factores técnicos y organizacionales."},
+  {q:"¿Qué determina el éxito de un SGS según el Libro Blanco de Renfe?",
+   o:["El presupuesto anual destinado a actividades preventivas de seguridad","El número de auditorías externas e inspecciones realizadas por la ERA","La madurez de la organización para desarrollar una Cultura de Seguridad que lo acompañe","La tecnología de señalización implantada y el porcentaje de flota con ETCS"],c:2,
+   e:"El éxito de un SGS depende de la madurez de la organización para desarrollar una Cultura de Seguridad que lo acompañe. Sin cultura real, un SGS no garantiza por sí solo la seguridad operacional."},
+  {q:"¿Por qué la Cultura de Seguridad es 'un bien intangible' según el Libro Blanco?",
+   o:["Porque no tiene coste económico directo ni aparece en el balance contable","Porque solo puede medirse subjetivamente mediante encuestas de clima laboral","Porque sus efectos sobre la seguridad son en su mayor parte ocultos a simple vista","Porque únicamente la perciben los directivos y mandos intermedios de la organización"],c:2,
+   e:"Sus efectos sobre la seguridad operacional son, en su mayor parte, ocultos a simple vista. Esta falta de visibilidad puede llevar a que algunas organizaciones le concedan menos importancia."},
+],
+B3S3:[
+  {q:"¿Qué es la 'Just Culture' o Cultura Justa en el Libro Blanco de Renfe?",
+   o:["Una cultura donde ningún empleado puede ser sancionado por ningún motivo","Una cultura donde solo los directivos asumen responsabilidades de seguridad","Una cultura que distingue error involuntario (no sancionable) de conducta negligente (sancionable), fomentando la notificación","Una cultura donde todos los fallos se tratan igual independientemente de la intención"],c:2,
+   e:"La Just Culture distingue entre errores humanos involuntarios —no sancionables para no inhibir la notificación— y conductas negligentes o intencionadas, que sí deben tener consecuencias."},
+  {q:"¿Cuáles son los cimientos del modelo de Cultura de Seguridad del Grupo Renfe?",
+   o:["Las normas técnicas, los procedimientos operativos y los sistemas de señalización","Los presupuestos de seguridad, las auditorías anuales y los indicadores de accidentabilidad","Principios como responsabilidad compartida, Just Culture, comunicación abierta y liderazgo en seguridad","Los certificados de seguridad, las habilitaciones del personal y las homologaciones de material"],c:2,
+   e:"Los cimientos del modelo incluyen: responsabilidad compartida, Just Culture, comunicación abierta, aprendizaje de incidentes y liderazgo comprometido con la seguridad en todos los niveles."},
+],
+B3S4:[
+  {q:"¿Cuál es el objetivo del Plan de Transformación de la Cultura de Seguridad?",
+   o:["Reducir el número de empleados del departamento de seguridad optimizando costes","Sustituir los sistemas de señalización ASFA por ETCS en toda la red convencional","Realizar los cambios necesarios para lograr el alineamiento con la Cultura de Seguridad deseada","Externalizar los servicios de mantenimiento preventivo a empresas especializadas"],c:2,
+   e:"El Plan de Transformación busca realizar los cambios necesarios en la organización para lograr el alineamiento con la Cultura de Seguridad Operacional deseada, implicando a todos los colectivos."},
+  {q:"¿Qué colectivos implica el Plan de Transformación de la Cultura de Seguridad?",
+   o:["Solo el personal operativo: maquinistas, interventores y personal de a bordo","Solo los mandos intermedios y directivos responsables de operaciones","Todos los colectivos del Grupo Renfe: personal operativo, técnico y directivo","Solo el personal de mantenimiento y los técnicos de señalización"],c:2,
+   e:"El Plan implica a todos los colectivos del Grupo Renfe. La Cultura de Seguridad es responsabilidad de toda la organización, desde el personal operativo hasta la alta dirección."},
+],
+B4S1:[
+  {q:"¿Cómo define Renfe la Experiencia de Cliente (CX) en su material formativo?",
+   o:["El nivel de satisfacción medido en encuestas tras el uso del servicio","La calidad percibida del servicio en comparación con la competencia","Todo lo que una persona vive con una empresa en todas sus interacciones a través de todos los canales","El conjunto de servicios adicionales que acompañan al transporte básico"],c:2,
+   e:"Según el material de Renfe, la CX es todo lo que una persona vive con una empresa, en todas sus interacciones, durante toda su relación y a través de todos los canales."},
+  {q:"¿Cuál es la diferencia clave entre Experiencia de Cliente y Atención al Cliente?",
+   o:["La Atención al Cliente es más costosa e importante estratégicamente que la CX","La CX es solo responsabilidad del departamento de Marketing y Comunicación","La Atención al Cliente actúa en momentos puntuales; la CX abarca toda la relación y es responsabilidad de toda la organización","La CX se mide solo con el NPS; la Atención al Cliente con tiempo de resolución"],c:2,
+   e:"La Atención al Cliente actúa en momentos puntuales desde un área concreta. La CX es responsabilidad de toda la organización y está presente desde el diseño del producto hasta el servicio postventa."},
+  {q:"¿En qué 'era' estamos según la evolución histórica de la gestión de clientes?",
+   o:["Era del producto, donde la diferenciación es la calidad técnica del servicio","Era del marketing, donde la comunicación y la marca son el factor clave","Era del cliente, donde las necesidades individuales guían todas las decisiones","Era de las experiencias, donde la diferenciación clave es la experiencia completa vivida"],c:3,
+   e:"Según el material de Renfe, tras las eras de la producción, el producto, el marketing y el cliente, hoy estamos en la era de las experiencias, donde la diferenciación es la experiencia completa."},
+  {q:"¿Por qué es estratégicamente importante la CX para el Grupo Renfe?",
+   o:["Principalmente por la obligación legal de medir la satisfacción del cliente","Porque mejora la imagen en redes sociales y atrae a nuevos segmentos de viajeros","Porque es un pilar estratégico con impacto directo en retención, fidelización y resultados","Porque reduce los costes de gestión de reclamaciones y atención postventa"],c:2,
+   e:"El foco en el Cliente es un pilar del Plan Estratégico del Grupo Renfe. Una buena CX genera retención, fidelización, recomendación y tiene impacto directo en los resultados del negocio."},
+],
+B4S2:[
+  {q:"¿Cuáles son los elementos clave de la CX según el material de Renfe?",
+   o:["Solo la puntualidad, el precio y la limpieza del material rodante","Únicamente los aspectos emocionales como satisfacción y conexión con la marca","Aspectos emocionales (satisfacción, confianza) y prácticos (calidad, eficiencia, facilidad de uso)","Solo los aspectos medibles mediante indicadores cuantitativos de rendimiento"],c:2,
+   e:"Los elementos clave de la CX incluyen aspectos emocionales (satisfacción, confianza, conexión emocional) y prácticos (calidad del servicio, eficiencia, facilidad de uso), presentes en todas las interacciones."},
+  {q:"¿Qué describe el ciclo de vida del cliente en CX?",
+   o:["La duración media del contrato de abono de un cliente frecuente","El número de viajes que realiza un cliente en un año natural","Las etapas de la relación: atracción, adquisición, uso, fidelización y recomendación","El período desde la primera compra hasta la primera reclamación del cliente"],c:2,
+   e:"El ciclo de vida del cliente describe las etapas: atracción, adquisición, primer uso, uso recurrente, fidelización y recomendación. Gestionarlo bien maximiza el valor del cliente a largo plazo."},
+  {q:"¿Cuál de los siguientes es un factor que influye en la CX según Renfe?",
+   o:["La modernidad y tecnología del material rodante exclusivamente","Solo la velocidad y puntualidad de los servicios ferroviarios","La empatía, personalización y comunicación efectiva entre otros factores","Únicamente el precio del billete y la disponibilidad de plazas"],c:2,
+   e:"Los factores que influyen en la CX incluyen empatía, personalización, comunicación efectiva, accesibilidad y capacidad de resolver problemas, además de la calidad y consistencia del servicio."},
+],
+B4S3:[
+  {q:"¿Qué representa el Customer Journey Map (Pasillo del Cliente)?",
+   o:["El recorrido físico del viajero dentro de la estación hasta el andén","El mapa geográfico de la red de líneas y servicios de Renfe Viajeros","Una herramienta visual de todos los touchpoints del cliente identificando emociones y fricción","El diagrama de flujo del proceso de compra de billetes en la web de Renfe"],c:2,
+   e:"El Customer Journey Map visualiza todas las interacciones del cliente con la empresa, identificando sus emociones y necesidades en cada momento, así como los puntos de dolor a mejorar."},
+  {q:"¿Qué son los 'arquetipos' como herramienta de Experiencia de Cliente?",
+   o:["Los prototipos de nuevos materiales rodantes antes de su homologación","Los modelos de formación estandarizados para el personal de atención al cliente","Representaciones de segmentos de clientes basadas en datos reales para diseñar mejores experiencias","Los estándares de calidad del servicio definidos en el contrato de gestión de Renfe"],c:2,
+   e:"Los arquetipos son representaciones de segmentos de clientes basadas en datos reales sobre comportamientos y motivaciones, ayudando a diseñar experiencias centradas en sus necesidades reales."},
+  {q:"¿Qué son los KPIs de Experiencia de Cliente?",
+   o:["Los kilómetros recorridos por unidad de flota en servicio comercial","Los tiempos de intervención ante incidencias técnicas en la infraestructura","Indicadores clave que miden el grado de cumplimiento de los objetivos de CX","Los porcentajes de ocupación y puntualidad de los servicios ferroviarios"],c:2,
+   e:"Los KPIs de CX miden la experiencia del cliente. Los más relevantes: NPS (Net Promoter Score), CSAT (Customer Satisfaction Score) y CES (Customer Effort Score), entre otros."},
+  {q:"¿Qué representa el Blueprint o Mapa de Procesos en CX?",
+   o:["El plano arquitectónico de las nuevas estaciones de alta velocidad","El manual de procedimientos de atención al cliente en ventanilla","Una herramienta que muestra la experiencia visible del cliente y los procesos internos que la sostienen","El diagrama de los sistemas informáticos de venta y gestión de reservas"],c:2,
+   e:"El Blueprint representa en un mismo documento la experiencia del cliente (lo que ve) y los procesos internos de la empresa (lo que no ve) que la sostienen, ayudando a identificar fallos de proceso."},
+],
+B4S4:[
+  {q:"¿Qué significa una 'cultura orientada al cliente' en una organización?",
+   o:["Que el departamento de atención al cliente tiene el mayor presupuesto de la empresa","Que todos los procesos están certificados con la norma ISO de calidad en el servicio","Que el cliente está en el centro de todas las decisiones y todos los empleados contribuyen a su experiencia","Que la empresa realiza encuestas de satisfacción después de cada interacción con el cliente"],c:2,
+   e:"Una cultura orientada al cliente significa que el cliente está en el centro de todas las decisiones, con todos los empleados (no solo los de atención directa) contribuyendo activamente."},
+  {q:"¿Qué habilidades son clave para la Experiencia de Cliente en Renfe?",
+   o:["Conocimientos técnicos del sistema ferroviario y la normativa de circulación","Dominio de los sistemas informáticos de venta y gestión de incidencias","Empatía, escucha activa, comunicación efectiva, resolución de problemas y orientación al cliente","Idiomas extranjeros y conocimiento de tarifas internacionales y pases ferroviarios"],c:2,
+   e:"Las competencias clave para la CX incluyen habilidades relacionales (empatía, escucha activa, comunicación), de gestión (resolución de problemas) y de actitud (orientación al cliente, proactividad)."},
+],
+B4S5:[
+  {q:"¿Qué mide el NPS (Net Promoter Score)?",
+   o:["La velocidad media de resolución de reclamaciones por canal de atención","El porcentaje de clientes que repiten viaje en los siguientes 30 días","La propensión a recomendar el servicio: % Promotores (9-10) menos % Detractores (0-6)","El nivel de satisfacción con la limpieza y confort de los trenes"],c:2,
+   e:"El NPS mide la lealtad del cliente preguntando la probabilidad de recomendar el servicio (0-10). Promotores=9-10, Pasivos=7-8, Detractores=0-6. NPS = % Promotores - % Detractores."},
+  {q:"¿Cómo impacta la IA en la Experiencia de Cliente Digital?",
+   o:["Solo en la venta automatizada de billetes y la gestión de cancelaciones masivas","Únicamente en la detección de fraude en compras online y en la seguridad de pagos","Permite personalizar experiencias, anticipar necesidades, automatizar respuestas y ofrecer CX omnicanal coherente","Solo mejora la velocidad de respuesta en el chat de atención al cliente online"],c:2,
+   e:"La IA permite personalizar experiencias a escala, anticiparse a necesidades, automatizar procesos (chatbots, recomendadores) y garantizar experiencia omnicanal coherente en todos los canales."},
+  {q:"¿Qué es el proceso de recuperación del servicio en CX?",
+   o:["El protocolo técnico para restablecer el servicio tras una avería o incidencia","El procedimiento de reembolso automático cuando el retraso supera 60 minutos","Las acciones para corregir un fallo en el servicio y reconquistar la confianza del cliente afectado","El plan de contingencia para desviar viajeros a servicios alternativos de transporte"],c:2,
+   e:"La recuperación del servicio son las acciones que la empresa pone en marcha para corregir un fallo, disculparse adecuadamente y ofrecer soluciones. Una buena recuperación puede fidelizar más que si el fallo no hubiera ocurrido."},
+],
+B5S1:[
+  {q:"¿Cuál es el fundamento técnico que explica la ventaja del ferrocarril?",
+   o:["La capacidad de alcanzar velocidades superiores a los 300 km/h en alta velocidad","La posibilidad de transportar mercancías peligrosas con mayor seguridad","La rodadura metal sobre metal tiene resistencia al avance muy inferior a la de caucho sobre asfalto","La menor emisión de CO2 por kilómetro frente a los modos de transporte carreteros"],c:2,
+   e:"El fundamento técnico del ferrocarril es que la rodadura de acero sobre acero tiene una resistencia al avance muy inferior a caucho sobre asfalto, permitiendo mover grandes cargas con menor energía."},
+  {q:"¿Cuál fue el primer ferrocarril inaugurado en la Península Ibérica?",
+   o:["Barcelona-Mataró en 1848, primera línea en territorio peninsular","Valencia-Játiva en 1852, promovida por el capital inglés","Madrid-Toledo en 1858, primera línea de la meseta central","Sevilla-Jerez en 1860, primera línea de Andalucía occidental"],c:0,
+   e:"El primer ferrocarril peninsular fue el de Madrid-Aranjuez (1851). En el conjunto del Estado español, el primero fue Barcelona-Mataró (1848). En Cuba (entonces española) se inauguró el primero en 1837."},
+  {q:"¿Cuándo y cómo se creó RENFE?",
+   o:["En 1929 mediante el Estatuto Ferroviario durante la Dictadura de Primo de Rivera","En 1936 por Decreto de Incautación durante el inicio de la Guerra Civil","En 1941 mediante la Ley de Bases de Ordenación Ferroviaria, nationalizando las compañías privadas","En 1953 mediante un convenio entre el Estado y las principales compañías ferroviarias"],c:2,
+   e:"RENFE fue creada en 1941 mediante la Ley de Bases de Ordenación Ferroviaria y de los Transportes por Carretera, nationalizando las compañías privadas muy deterioradas tras la Guerra Civil."},
+  {q:"¿En qué año entró en servicio el primer AVE en España y entre qué ciudades?",
+   o:["1988 entre Madrid y Ciudad Real, como tramo inicial de pruebas","1992 entre Madrid y Sevilla, coincidiendo con la Expo Universal","1995 entre Madrid y Zaragoza, al inaugurarse el primer tramo aragonés","2000 entre Madrid y Lleida, primer tramo hacia Barcelona"],c:1,
+   e:"El primer AVE en España entró en servicio el 14 de abril de 1992, uniendo Madrid con Sevilla coincidiendo con la Expo. Adoptó el ancho UIC de 1.435 mm y electrificación a 25 kV/50 Hz."},
+  {q:"¿En qué Consejo de Ministros se adoptó el ancho UIC para la alta velocidad española?",
+   o:["En el Consejo de Ministros del 15 de junio de 1985","En el Consejo de Ministros del 9 de diciembre de 1988","En el Consejo de Ministros del 23 de febrero de 1991","En el Consejo de Ministros del 7 de abril de 1992"],c:1,
+   e:"La decisión de adoptar el ancho UIC de 1.435 mm para la red de alta velocidad española fue tomada en el Consejo de Ministros del 9 de diciembre de 1988."},
+],
+B5S2:[
+  {q:"¿Qué son los Paquetes Ferroviarios de la Unión Europea?",
+   o:["Los contratos marco de suministro de material rodante entre operadoras europeas","Los acuerdos bilaterales de interoperabilidad entre países fronterizos","Conjuntos de directivas y reglamentos que liberalizaron el sector separando infraestructura de operación","Los planes de inversión plurianuales en infraestructura ferroviaria de la UE"],c:2,
+   e:"Los Paquetes Ferroviarios son conjuntos de legislación europea que han liberalizado progresivamente el sector, separando gestión de infraestructuras de operación y avanzando hacia el Espacio Ferroviario Europeo Único."},
+  {q:"¿Qué son las ETI (Especificaciones Técnicas de Interoperabilidad)?",
+   o:["Los contratos de mantenimiento estándar entre operadoras y talleres europeos","Los certificados de aptitud profesional del personal ferroviario en la UE","Normas técnicas europeas que definen requisitos de subsistemas ferroviarios para garantizar la interoperabilidad","Los estándares de confort y accesibilidad obligatorios en el material rodante europeo"],c:2,
+   e:"Las ETI son especificaciones técnicas europeas que definen los requisitos de los subsistemas ferroviarios para garantizar que los trenes puedan circular por las redes de diferentes países miembros."},
+  {q:"¿Qué es la ERA (Agencia Ferroviaria de la UE)?",
+   o:["La empresa de trenes de alta velocidad que opera servicios transfronterizos en Europa","El organismo de la UE que fija los precios máximos de los billetes ferroviarios internacionales","La Agencia que promueve el Espacio Ferroviario Europeo Único y establece normas de seguridad e interoperabilidad","El tribunal europeo que resuelve disputas entre operadoras y gestores de infraestructura"],c:2,
+   e:"ERA (European Union Agency for Railways) promueve el Espacio Ferroviario Europeo Único, elabora normas técnicas de seguridad e interoperabilidad y emite autorizaciones de vehículos desde 2019."},
+  {q:"¿Qué Ley separó la gestión de infraestructuras de la operación ferroviaria en España?",
+   o:["La Ley 16/1987 de Ordenación de los Transportes Terrestres (LOTT)","La Ley 39/2003 del Sector Ferroviario que creó ADIF y Renfe Operadora","El Real Decreto 2387/2004 por el que se aprobó el Reglamento del Sector Ferroviario","La Ley 38/2015 del Sector Ferroviario que actualizó el marco regulatorio"],c:1,
+   e:"La Ley 39/2003 del Sector Ferroviario separó la gestión de infraestructuras (ADIF) de la operación de servicios (RENFE Operadora), liberalizando progresivamente el mercado ferroviario español."},
+  {q:"¿Qué es la CIAF?",
+   o:["El Centro de Intervención y Asistencia Ferroviaria de ADIF en operaciones","La Comisión de Investigación de Accidentes Ferroviarios, organismo independiente para mejorar la seguridad","La Comisión Interministerial de Acceso Ferroviario para nuevas operadoras","El Centro Integrado de Atención Ferroviaria al viajero de Renfe"],c:1,
+   e:"La CIAF (Comisión de Investigación de Accidentes Ferroviarios) investiga accidentes e incidentes graves en el ferrocarril español con el único objetivo de mejorar la seguridad, sin determinar culpabilidades."},
+],
+B5S3:[
+  {q:"¿Qué es la RFIG?",
+   o:["La Red Ferroviaria Internacional de Gran velocidad entre España y Francia","La Red Ferroviaria de Interés General cuya titularidad corresponde al Estado y administra ADIF","El Reglamento Ferroviario Interno del Grupo Renfe para la explotación de servicios","La Red de Ferrocarriles de Interés Geográfico de las Comunidades Autónomas"],c:1,
+   e:"La RFIG (Red Ferroviaria de Interés General) es el conjunto de líneas cuya titularidad corresponde al Estado español, siendo ADIF el organismo encargado de su administración y gestión."},
+  {q:"¿Cuántos km aproximados tiene la RFIG en España?",
+   o:["En torno a 5.000 km concentrados principalmente en la red de alta velocidad","Aproximadamente 8.500 km de red convencional de ancho ibérico exclusivamente","Más de 15.000 km incluyendo alta velocidad y red convencional en ambos anchos","Aproximadamente 25.000 km siendo la red más extensa de Europa occidental"],c:2,
+   e:"La RFIG supera los 15.000 km, incluyendo la red de alta velocidad (en torno a 3.800 km, segunda más extensa del mundo) y la red convencional de ancho ibérico y métrico."},
+  {q:"¿Qué recoge el Catálogo de Líneas de la RFIG?",
+   o:["Los horarios oficiales de todos los servicios que circulan por cada línea","La relación de empresas autorizadas a operar servicios en cada tramo de la red","Todas las líneas de la RFIG con sus características técnicas: longitud, ancho, electrificación y velocidad máxima","Los planes de inversión y mejora previstos para cada línea en el próximo decenio"],c:2,
+   e:"El Catálogo de Líneas relaciona y clasifica todas las líneas de la RFIG con sus características técnicas: longitud, ancho de vía, electrificación, velocidad máxima y tipo de tráfico."},
+],
+B5S4:[
+  {q:"¿Cuál es el ancho de vía de la red convencional española (ancho ibérico)?",
+   o:["1.000 mm, también llamado ancho métrico o estrecho","1.435 mm, el estándar UIC utilizado en la mayoría de países europeos","1.668 mm, mayor que el UIC europeo, propio de la red convencional española","1.520 mm, ancho utilizado en los países de la antigua Unión Soviética"],c:2,
+   e:"El ancho ibérico es de 1.668 mm y es el utilizado en la red ferroviaria convencional española. Es mayor que el UIC europeo (1.435 mm), que se usa en la red de alta velocidad española."},
+  {q:"¿Qué función cumple el balasto en la superestructura ferroviaria?",
+   o:["Proporciona la señal de control al sistema ASFA mediante elementos magnéticos","Actúa como conductor eléctrico entre el carril y el sistema de retorno de corriente","Sirve de asiento a las traviesas distribuyendo cargas, facilitando drenaje y manteniendo geometría","Protege la infraestructura ferroviaria frente a los efectos de las heladas invernales"],c:2,
+   e:"El balasto es el lecho de grava que forma la capa de asiento de las traviesas. Distribuye cargas, facilita el drenaje, absorbe vibraciones y mantiene la geometría de la vía."},
+  {q:"¿Qué distingue a la 'vía en placa' de la vía con balasto?",
+   o:["La vía en placa usa carril de mayor sección y más resistente al desgaste","La vía en placa incorpora traviesas de madera en lugar de hormigón pretensado","La vía en placa prescinde del balasto, fijando el carril sobre una losa de hormigón","La vía en placa utiliza un ancho de vía ligeramente diferente al estándar UIC"],c:2,
+   e:"La vía en placa prescinde del balasto, fijando el carril sobre una losa de hormigón o asfalto. Se usa en túneles, viaductos y tramos de alta velocidad por mayor durabilidad y menor mantenimiento."},
+  {q:"¿Qué tensión usa la catenaria de la red de alta velocidad española?",
+   o:["1.500 V en corriente continua, igual que la red convencional francesa","3.000 V en corriente continua, igual que la red convencional española","25.000 V en corriente alterna monofásica a 50 Hz, estándar UIC europeo","15.000 V en corriente alterna a 16,7 Hz, estándar de la red alemana y austriaca"],c:2,
+   e:"La red de alta velocidad española usa 25.000 V en corriente alterna monofásica a 50 Hz (estándar UIC europeo). La red convencional de Renfe usa 3.000 V en corriente continua."},
+  {q:"¿Qué compone un desvío en la infraestructura ferroviaria?",
+   o:["Una señal luminosa, un detector de paso y un sistema de enclavamiento automático","Una baliza ASFA, un contador de ejes y un circuito de vía de corriente alterna","Agujas que guían el tren, cruzamiento donde se cruzan los carriles y contracarriles","Un motor de agujas, un transformador de potencia y un sistema de calefacción antihielo"],c:2,
+   e:"Un desvío se compone de agujas (guían al tren hacia una u otra dirección), cruzamiento (donde se cruzan los carriles) y contracarriles (guían la pestaña de la rueda en el cruzamiento)."},
+],
+B5S5:[
+  {q:"¿Qué define al 'material motor' en terminología ferroviaria?",
+   o:["Todo el material que requiere homologación técnica antes de su puesta en servicio","Los vehículos que transportan exclusivamente carga y mercancías en la red ferroviaria","Los vehículos ferroviarios con sistema de tracción propio (locomotoras, automotores, unidades con motores distribuidos)","Los vehículos de mantenimiento e inspección de la infraestructura ferroviaria"],c:2,
+   e:"El material motor son los vehículos ferroviarios con tracción propia: locomotoras, automotores y unidades con motores distribuidos como el AVE S-100 o el S-102."},
+  {q:"¿Qué caracteriza al 'material remolcado'?",
+   o:["Que incorpora motores auxiliares para maniobras en estaciones y talleres","Que solo puede circular por líneas de ancho ibérico de la red convencional","Que carece de tracción propia y debe ser arrastrado por material motor","Que está diseñado exclusivamente para el transporte de mercancías especiales"],c:2,
+   e:"El material remolcado carece de sistema de tracción y debe ser arrastrado por material motor. Incluye coches de viajeros, furgones, vagones de mercancías y plataformas de transporte combinado."},
+  {q:"¿Qué tipos de material motor existen según la fuente de energía?",
+   o:["Solo eléctrico de catenaria y diésel de combustión interna como únicos tipos","Eléctrico, diésel de vapor y nuclear, según la fuente de energía primaria utilizada","Eléctrico (catenaria), diésel (combustión interna) y dual o bimodal (puede usar ambas fuentes)","Solo eléctrico en España al estar toda la red de Renfe Viajeros electrificada"],c:2,
+   e:"Existen tres tipos: eléctrico (alimentado por catenaria), diésel (combustión interna para líneas sin electrificar) y dual o bimodal (puede funcionar con catenaria o motor diésel)."},
+],
+B5S6:[
+  {q:"¿Qué hace el sistema ASFA en la red convencional española?",
+   o:["Gestiona la venta y validación automática de billetes en los trenes regionales","Controla la apertura y cierre de puertas en las estaciones de Cercanías","Transmite indicaciones de señales al tren y activa el freno de emergencia si el maquinista no las reconoce","Regula automáticamente la velocidad en las curvas según el radio de curvatura"],c:2,
+   e:"ASFA (Anuncio de Señales y Frenado Automático) transmite mediante balizas las indicaciones de las señales al tren y activa el freno de emergencia si el maquinista no reconoce una señal restrictiva."},
+  {q:"¿A qué sistema más amplio pertenece el ETCS?",
+   o:["Al sistema ASFA digital de nueva generación para la red convencional española","Al sistema LZB de control continuo de origen alemán implantado en líneas de alta velocidad","Al ERTMS (European Rail Traffic Management System) como componente de control de trenes","Al sistema GSM-R de comunicaciones ferroviarias digitales de banda UHF"],c:2,
+   e:"El ETCS (European Train Control System) es el componente de control de trenes del ERTMS. Supervisa continuamente la velocidad y aplica el freno si se supera la velocidad permitida."},
+  {q:"¿Cuáles son los niveles de aplicación del ETCS?",
+   o:["Solo existe el Nivel 2 como único nivel plenamente operativo en toda Europa","Nivel básico (balizas), Nivel avanzado (radio) y Nivel completo (satélite)","Nivel 1 (eurobalizas con señales), Nivel 2 (GSM-R sin señales laterales) y Nivel 3 (con control de integridad)","Nivel A (alta velocidad), Nivel B (media distancia) y Nivel C (Cercanías y regional)"],c:2,
+   e:"ETCS tiene tres niveles: Nivel 1 (información puntual por eurobalizas, compatible con señales laterales), Nivel 2 (comunicación continua via GSM-R, sin señales laterales) y Nivel 3 (añade control de integridad del tren)."},
+  {q:"¿Qué garantiza el sistema de enclavamiento en señalización ferroviaria?",
+   o:["Que los trenes reducen velocidad automáticamente al aproximarse a las estaciones","Que las puertas de los trenes no se abren mientras el vehículo está en movimiento","Que no pueden darse simultáneamente condiciones de circulación incompatibles o peligrosas","Que los sistemas de climatización funcionan correctamente en túneles y zonas confinadas"],c:2,
+   e:"El enclavamiento garantiza que no puedan darse simultáneamente condiciones peligrosas, como dar vía libre a dos trenes en ruta de colisión, o que las agujas cambien con un tren encima."},
+  {q:"¿Qué garantiza el principio de circulación por cantones?",
+   o:["Que los trenes mantengan siempre la velocidad máxima autorizada en cada tramo","Que el sistema de señalización funcione aunque falle la alimentación principal","Que solo un tren puede ocupar cada cantón a la vez, previniendo colisiones traseras","Que los trenes de alta velocidad no compartan infraestructura con los trenes regionales"],c:2,
+   e:"Las señales de cantón dividen la vía en tramos y garantizan que solo un tren puede ocupar un cantón al mismo tiempo, lo que constituye la base de la seguridad en la circulación ferroviaria."},
+],
+B5S7:[
+  {q:"¿Cuál es el principio fundamental de circulación ferroviaria?",
+   o:["El principio de velocidad máxima ajustada al perfil de la línea en cada tramo","El principio de intervalo de tiempo mínimo garantizado entre trenes consecutivos","El principio de un solo tren por cantón: en cada sección delimitada solo puede circular un tren a la vez","El principio de señalización redundante con doble sistema de control independiente"],c:2,
+   e:"El principio fundamental es que en cada cantón solo puede circular un tren a la vez. Este principio, implementado por el sistema de bloqueo, es la base de toda la seguridad en la circulación ferroviaria."},
+  {q:"¿Qué representa el gráfico de marchas (o malla horaria) en planificación ferroviaria?",
+   o:["El organigrama del personal de conducción asignado a cada línea","El mapa de las líneas y conexiones de la Red Ferroviaria de Interés General","La representación gráfica en tiempo-distancia de la circulación de trenes que permite planificar la línea","El calendario anual de mantenimiento preventivo de la infraestructura ferroviaria"],c:2,
+   e:"El gráfico de marchas es una representación gráfica con tiempo en el eje horizontal y distancia (estaciones) en el vertical. Permite planificar la circulación, identificar cruces y optimizar el uso de la infraestructura."},
+  {q:"¿Qué es una maniobra en explotación ferroviaria?",
+   o:["La actuación de emergencia cuando un tren se detiene fuera de estación","El procedimiento de cambio de maquinista al llegar a una estación de relevo","El movimiento de vehículos en zona de maniobras que no constituye circulación de tren","La operación de inversión del sentido de marcha en cabos de línea o estaciones terminales"],c:2,
+   e:"Las maniobras son movimientos de vehículos ferroviarios en estaciones o zonas habilitadas que no constituyen circulación de tren. Se realizan a baja velocidad bajo la autoridad del jefe de maniobras."},
+  {q:"¿Cuáles son los tipos de personal operativo ferroviario?",
+   o:["Solo maquinistas y personal de mantenimiento de material rodante","Personal administrativo y personal de atención al cliente en estaciones","Personal de circulación (jefes de circulación, operadores CTC) y personal en los trenes (maquinistas, interventores, personal de a bordo)","Solo el personal con habilitaciones de seguridad reconocidas por la CIAF"],c:2,
+   e:"El personal operativo incluye: personal de circulación (jefes de circulación, operadores de CTC) y personal en servicio en los trenes (maquinistas, interventores, personal de atención a bordo)."},
+],
+PS1:[
+  {q:"Serie: 2, 6, 18, 54, ?",o:[108,162,216,72],c:1,e:"×3 en cada paso: 54×3=162."},
+  {q:"Serie: 1, 4, 9, 16, 25, ?",o:[30,36,32,34],c:1,e:"Cuadrados perfectos: 6²=36."},
+  {q:"Serie: 100, 91, 83, 76, 70, ?",o:[65,64,63,66],c:0,e:"Diferencias: -9,-8,-7,-6,-5. Siguiente: 70-5=65."},
+  {q:"Serie: 3, 8, 15, 24, 35, ?",o:[45,46,48,50],c:2,e:"Diferencias impares crecientes: +5,+7,+9,+11,+13. Resultado: 35+13=48."},
+  {q:"Serie: 2, 3, 5, 8, 13, 21, ?",o:[29,31,34,36],c:2,e:"Fibonacci: 13+21=34."},
+  {q:"Serie: 80, 40, 20, 10, ?",o:[2,4,5,8],c:2,e:"÷2 en cada paso: 10÷2=5."},
+  {q:"Serie: 1, 2, 4, 7, 11, 16, ?",o:[20,21,22,23],c:2,e:"Diferencias: +1,+2,+3,+4,+5,+6. Resultado: 16+6=22."},
+  {q:"Serie: 144, 121, 100, 81, ?",o:[64,60,72,68],c:0,e:"Cuadrados decrecientes: 12²,11²,10²,9²,8²=64."},
+  {q:"Serie: 7, 14, 28, 56, ?",o:[98,112,100,120],c:1,e:"×2: 56×2=112."},
+  {q:"Serie: 1, 3, 7, 15, 31, ?",o:[57,61,63,65],c:2,e:"Regla ×2+1: 31×2+1=63."},
+  {q:"Serie: 5, 10, 20, 40, 80, ?",o:[120,140,160,180],c:2,e:"×2: 80×2=160."},
+  {q:"Serie: 15, 12, 9, 6, ?",o:[2,3,4,5],c:1,e:"-3 en cada paso: 6-3=3."},
+  {q:"Serie: 2, 5, 10, 17, 26, ?",o:[35,36,37,38],c:2,e:"Diferencias +3,+5,+7,+9,+11: 26+11=37."},
+  {q:"Serie: 4, 12, 36, 108, ?",o:[216,324,432,540],c:1,e:"×3: 108×3=324."},
+  {q:"Serie: 1, 8, 27, 64, 125, ?",o:[196,210,216,220],c:2,e:"Cubos: 1³,2³,3³,4³,5³,6³=216."},
+],
+PS2:[
+  {q:"Sinónimo de DILIGENTE:",o:["Perezoso y descuidado","Laborioso y aplicado","Lento y torpe","Vago e indolente"],c:1,e:"Diligente = rápido, cuidadoso y eficaz. Sinónimo: laborioso, aplicado, trabajador."},
+  {q:"Antónimo de FRUGAL:",o:["Austero y moderado","Sobrio y comedido","Derrochador y pródigo","Sencillo y humilde"],c:2,e:"Frugal = sobrio, moderado en gastos y consumo. Antónimo: derrochador, pródigo."},
+  {q:"LIBRO es a BIBLIOTECA como CUADRO es a:",o:["Pintura al óleo","Museo de arte","Marco de madera","Artista plástico"],c:1,e:"Objeto → lugar donde se expone o conserva: libro en biblioteca, cuadro en museo."},
+  {q:"Sinónimo de EFÍMERO:",o:["Eterno e imperecedero","Transitorio y pasajero","Permanente y duradero","Sólido e inmutable"],c:1,e:"Efímero = de muy corta duración. Sinónimo: transitorio, pasajero, fugaz."},
+  {q:"Antónimo de BENEVOLENTE:",o:["Bondadoso y generoso","Amable y cordial","Malévolo y malintencionado","Afectuoso y comprensivo"],c:2,e:"Benevolente = bien intencionado, bondadoso. Antónimo: malévolo, malintencionado."},
+  {q:"MÉDICO es a HOSPITAL como MAESTRO es a:",o:["Libro de texto","Alumno estudioso","Escuela o colegio","Conocimiento académico"],c:2,e:"Profesional → lugar donde ejerce su trabajo: médico en hospital, maestro en escuela."},
+  {q:"Sinónimo de PERSPICAZ:",o:["Torpe e irreflexivo","Agudo y sagaz","Lento e indeciso","Ingenuo y crédulo"],c:1,e:"Perspicaz = que comprende y percibe rápido. Sinónimo: agudo, sagaz, lúcido."},
+  {q:"AGUA es a SED como COMIDA es a:",o:["Hambre y necesidad","Cocina y alimentos","Restaurante y comedor","Boca y estómago"],c:0,e:"Remedio → necesidad que satisface: el agua calma la sed, la comida calma el hambre."},
+  {q:"Antónimo de PROLIJO:",o:["Extenso y detallado","Exhaustivo y minucioso","Escueto y conciso","Completo y profundo"],c:2,e:"Prolijo = muy extenso, que se extiende demasiado. Antónimo: escueto, conciso, breve."},
+  {q:"Sinónimo de TÁCITO:",o:["Explícito y claro","Implícito y sobreentendido","Verbal y expreso","Escrito y formal"],c:1,e:"Tácito = sobreentendido, no expresado formalmente. Sinónimo: implícito, sobreentendido."},
+  {q:"AVIÓN es a AEROPUERTO como TREN es a:",o:["Vía férrea o carril","Vagón de pasajeros","Estación de ferrocarril","Andén de embarque"],c:2,e:"Vehículo → punto de embarque habitual: avión en aeropuerto, tren en estación."},
+  {q:"Antónimo de DIÁFANO:",o:["Claro y luminoso","Transparente y nítido","Opaco y turbio","Brillante y reluciente"],c:2,e:"Diáfano = claro, transparente, luminoso. Antónimo: opaco, turbio, oscuro."},
+  {q:"Sinónimo de ESCRUPULOSO:",o:["Descuidado y negligente","Meticuloso y riguroso","Impreciso y aproximado","Superficial y ligero"],c:1,e:"Escrupuloso = muy cuidadoso y exacto. Sinónimo: meticuloso, minucioso, riguroso."},
+  {q:"Antónimo de VERÍDICO:",o:["Cierto y comprobado","Fehaciente y fidedigno","Falso y mendaz","Documentado y contrastado"],c:2,e:"Verídico = que dice o contiene la verdad. Antónimo: falso, mendaz, ficticio."},
+],
+PS3:[
+  {q:"Secuencia: ○ □ △ ○ □ ?",o:["Círculo ○","Cuadrado □","Triángulo △","Rombo ◇"],c:2,e:"Patrón de 3 figuras: ○□△ se repite. Tras ○□△ ○□, la siguiente es △ (triángulo)."},
+  {q:"Polígonos añadiendo un lado: △(3)→□(4)→⬠(5)→⬡(6)→?",o:["Heptágono de 7 lados","Octógono de 8 lados","Pentágono de 5 lados","Hexágono de 6 lados"],c:0,e:"Cada figura añade un lado al anterior. Tras hexágono (6 lados) viene heptágono (7 lados)."},
+  {q:"Flecha apunta ↑. Gira 90° horario 3 veces. ¿A dónde apunta?",o:["Arriba ↑","Derecha →","Abajo ↓","Izquierda ←"],c:2,e:"↑ →90°→ → →90°→ ↓ →90°→ ←. Tras 3 giros horarios de 90°, apunta hacia abajo ↓."},
+  {q:"Filas de matriz suman 15. Fila 1=[2,7,6], Fila 2=[9,5,1], Fila 3=[4,?,8]. ¿Cuál es '?'?",o:["El número 2","El número 3","El número 4","El número 5"],c:1,e:"4+?+8=15 → ?=15-12=3."},
+  {q:"Patrón: ●○●○●. ¿Cuál es el siguiente elemento?",o:["Círculo negro ●","Círculo blanco ○","Círculo mitad ◐","Círculo mitad ◑"],c:1,e:"Alterna ●○ de forma regular. Tras 5 elementos (●○●○●), el 6.º es ○ (círculo blanco)."},
+  {q:"Regla: col2=col1×2, col3=col1×3. Fila=[4,?,12]. ¿Cuál es '?'?",o:["El número 6","El número 7","El número 8","El número 9"],c:2,e:"Aplicando la regla: col2=col1×2=4×2=8."},
+  {q:"Patrón de puntos que se duplican: paso1=1, paso2=2, paso3=4. ¿Cuántos en el paso 4?",o:["Seis puntos en el paso 4","Ocho puntos en el paso 4","Siete puntos en el paso 4","Cinco puntos en el paso 4"],c:1,e:"La secuencia se duplica en cada paso: 1, 2, 4, 8. En el paso 4 hay 8 puntos."},
+  {q:"Cuadrado mágico 3×3 con diagonal principal [2,5,8] cuya suma es 15. ¿Qué hay en el centro?",o:["El número 4 en el centro","El número 5 en el centro","El número 6 en el centro","El número 7 en el centro"],c:1,e:"En el cuadrado mágico estándar de orden 3, el centro es siempre 5 (todas las líneas suman 15)."},
+],
+};
+
+// Navigation history stack
+const NAV_STACK = [];
+function pushView(view){
+  if(S.view && S.view !== view) NAV_STACK.push(S.view);
+  if(NAV_STACK.length > 20) NAV_STACK.shift();
+}
+
+let S={
+  view:'home',online:navigator.onLine,ip:null,showIP:false,
+  dark:localStorage.getItem('rnf_dark')==='1',
+  // Simulacro real state
+  simPhase:0, simResults:[], simPhaseData:null,
+  qs:[],cur:0,ans:{},rev:{},tLeft:0,tInt:null,cfg:null,
+  result:null,showRev:false,stats:loadStats(),
+  cSubs:[],cN:15,cT:25,useAI:false,openBlks:{},
+};
+function loadStats(){try{const s=localStorage.getItem('rnf_v5');return s?JSON.parse(s):{exams:[]}}catch{return{exams:[]}}}
+function saveStats(){try{localStorage.setItem('rnf_v5',JSON.stringify(S.stats))}catch{}}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]]}return b}
+function fmt(s){return`${0|s/60}:${String(s%60).padStart(2,'0')}`}
+function getC(q){return q.c!==undefined?q.c:q.correct}
+function getO(q){return q.o||q.opts||q.options||[]}
+async function genAI(sid,label,n){
+  const p=`Eres experto en oposiciones Renfe Operador Comercial de Entrada N2 (Oferta de Empleo Grupo Renfe 2026).\nGenera ${n} preguntas tipo test rigurosas sobre: "${label}".\nBasadas estrictamente en el temario oficial del Grupo Renfe 2026. 4 opciones, 1 correcta, opciones plausibles, explicación detallada.\nRespende SOLO JSON sin markdown:\n{"questions":[{"question":"...","options":["A","B","C","D"],"correct":0,"explanation":"..."}]}`;
+  const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:p}]})});
+  const d=await r.json();
+  const t=d.content?.map(i=>i.text||"").join("")||"";
+  const parsed=JSON.parse(t.replace(/```json|```/g,"").trim());
+  return(parsed.questions||[]).map(q=>({q:q.question,o:q.options,c:q.correct,e:q.explanation,src:'ia'}));
+}
+async function startQuiz(cfg){
+  S.cfg=cfg;S.view='loading';S.ans={};S.rev={};S.cur=0;render();
+  let qs=[];
+  if(S.online&&cfg.useAI){
+    try{
+      const pp=Math.max(3,Math.ceil(cfg.n/cfg.subs.length));
+      const all=await Promise.all(cfg.subs.map(sid=>{
+        const sub=[...BLOQUES.flatMap(b=>b.subs),...PSICO_SUBS].find(s=>s.id===sid);
+        return genAI(sid,sub?.name||sid,pp);
+      }));
+      qs=shuffle(all.flat()).slice(0,cfg.n).map((q,i)=>({...q,id:i}));
+    }catch(e){console.warn('AI fail',e)}
+  }
+  if(qs.length<cfg.n){
+    let pool=[];cfg.subs.forEach(sid=>(QB[sid]||[]).forEach(q=>pool.push({...q,src:'offline',sid})));
+    const need=cfg.n-qs.length;
+    qs=[...qs,...shuffle(pool).slice(0,need).map((q,i)=>({...q,id:qs.length+i}))];
+  }
+  S.qs=qs;S.tLeft=cfg.tSec;S.view='quiz';
+  clearInterval(S.tInt);
+  S.tInt=setInterval(()=>{if(--S.tLeft<=0){clearInterval(S.tInt);finishQuiz();}else updT();},1000);
+  render();
+}
+function updT(){
+  const el=document.getElementById('tmr');if(!el)return;
+  el.textContent='⏱ '+fmt(S.tLeft);
+  el.className='timer'+(S.tLeft<60?' danger':S.tLeft<180?' warn':'');
+}
+function selAns(qi,opt){if(S.ans[qi]!==undefined)return;S.ans[qi]=opt;S.rev[qi]=true;renderQ();}
+function finishQuiz(){
+  clearInterval(S.tInt);
+  const q=S.qs;
+  const correct=q.filter((_,i)=>S.ans[i]===getC(q[i])).length;
+  const wrong=q.filter((_,i)=>S.ans[i]!==undefined&&S.ans[i]!==-1&&S.ans[i]!==getC(q[i])).length;
+  const skipped=q.length-correct-wrong;
+  const pct=Math.round(correct/q.length*100);
+  S.result={questions:q,answers:{...S.ans},correct,wrong,skipped,total:q.length,pct,timeTaken:S.cfg.tSec-S.tLeft};
+  S.stats.exams.push({date:Date.now(),correct,total:q.length,pct,label:S.cfg.label||''});
+  saveStats();
+  saveFailedQuestions(S.result);S.showRev=false;S.view='results';render();
+}
+function render(){
+  const a=document.getElementById('app');
+  const te=S.stats.exams.length;
+  const avg=te?Math.round(S.stats.exams.reduce((s,e)=>s+e.pct,0)/te):0;
+  a.innerHTML=`
+  ${S.showIP?`<div class="inst"><div class="inst-t">📱 <strong>Instalar como app</strong> — Funciona sin internet</div>
+    <button class="btn btn-p btn-sm" onclick="doIP()">Instalar</button>
+    <button class="inst-x" onclick="dismissIP()">✕</button></div>`:''}
+
+  <div class="screen" id="scr">${renderView(te,avg)}</div>
+  <nav class="bottom-tabs" id="btabs">
+    <button class="tab-btn" id="tab-home" onclick="goHome()">
+      <span class="tab-icon">🏠</span>
+      <span class="tab-lbl">Inicio</span>
+    </button>
+    <button class="tab-btn" id="tab-temario" onclick="startByBloque()">
+      <span class="tab-icon">📚</span>
+      <span class="tab-lbl">Temario</span>
+    </button>
+    <button class="tab-btn" id="tab-psico" onclick="startPsicoBloque()">
+      <span class="tab-icon">🧠</span>
+      <span class="tab-lbl">Psicotécnicos</span>
+    </button>
+    <button class="tab-btn" id="tab-stats" onclick="goStats()">
+      <span class="tab-icon">📊</span>
+      <span class="tab-lbl">Progreso</span>
+    </button>
+  </nav>
+  ${(S.view==='quiz'||S.view==='simreal_running'||S.view==='loading')?`<div class="quiz-nav"><div id="qnv" style="display:flex;justify-content:space-between;width:100%;align-items:center"></div></div>`:''}
+  ${S.view==='config'?renderModal():''}`;
+  if(S.view==='quiz'||S.view==='simreal_running'){renderQ();updT();}
+  // Update tab active states
+  const tabHome=document.getElementById('tab-home');
+  const tabTemario=document.getElementById('tab-temario');
+  const tabPsico=document.getElementById('tab-psico');
+  const tabStats=document.getElementById('tab-stats');
+  if(tabHome) tabHome.classList.toggle('on', S.view==='home');
+  if(tabTemario) tabTemario.classList.toggle('on', S.view==='bybloque');
+  if(tabPsico) tabPsico.classList.toggle('on', S.view==='psico_tab');
+  if(tabStats) tabStats.classList.toggle('on', S.view==='stats');
+  // Update dark toggle icon
+  const darkBtn=document.getElementById('dark-btn');
+  if(darkBtn) darkBtn.textContent=S.dark?'☀️':'🌙';
+}
+function renderView(te,avg){
+  switch(S.view){
+    case'home':return renderHome(te,avg);
+    case'loading':return`<div class="loader"><div class="spin"></div><div class="loader-t">Preparando preguntas…</div><div>${S.online&&S.useAI?'Generando con IA del temario oficial':'Cargando banco offline'}</div></div>`;
+    case'quiz':return renderQuizShell();
+    case'results':return renderResults();
+    case'stats':return renderStats(te,avg);
+    case'revision':return renderRevision();
+    case'bybloque':return renderByBloque();
+    case'simreal':return renderSimrealPhaseEnd();
+    case'simreal_running':return renderQuizShell();
+    default:return renderHome(te,avg);
+  }
+}
+function renderHome(te,avg){
+  const blkHtml=BLOQUES.map(b=>{
+    const isOpen=!!S.openBlks[b.id];
+    const subsHtml=isOpen?`<div class="subs-grid">${b.subs.map(s=>`
+      <div class="sub-card" style="--bc:${b.color}" onclick="startSubTest('${s.id}','${s.name.replace(/'/g,"\\'")}','${b.id}')">
+        <div class="sc-icon">${s.icon}</div><div class="sc-name">${s.name}</div><div class="sc-desc">${s.desc}</div>
+      </div>`).join('')}</div>`:'';
+    return`<div class="bloque">
+      <div class="blk-hdr" onclick="toggleBlk('${b.id}')">
+        <div class="blk-num" style="background:${b.color}">${b.num}</div>
+        <div class="blk-info"><div class="blk-title">${b.icon} ${b.title}</div>
+          <div class="blk-sub">${b.subs.length} subapartados · Pulsa para practicar</div></div>
+        <div class="blk-arr ${isOpen?'open':''}">▶</div>
+      </div>${subsHtml}
+    </div>`;
+  }).join('');
+  const psHtml=`<div class="bloque">
+    <div class="blk-hdr" onclick="toggleBlk('PSICO')">
+      <div class="blk-num" style="background:var(--bp)">P</div>
+      <div class="blk-info"><div class="blk-title">🧠 Psicotécnicos</div>
+        <div class="blk-sub">${PSICO_SUBS.length} tipos de ejercicios · Pulsa para practicar</div></div>
+      <div class="blk-arr ${S.openBlks['PSICO']?'open':''}">▶</div>
+    </div>
+    ${S.openBlks['PSICO']?`<div class="subs-grid">${PSICO_SUBS.map(s=>`
+      <div class="sub-card" style="--bc:var(--bp)" onclick="startSubTest('${s.id}','${s.name}','PSICO')">
+        <div class="sc-icon">${s.icon}</div><div class="sc-name">${s.name}</div><div class="sc-desc">${s.desc}</div>
+      </div>`).join('')}</div>`:''}
+  </div>`;
+  return`<div class="home">
+    <div class="anden-header">
+      <button class="dark-toggle" id="dark-btn" onclick="toggleDark()" title="Modo claro/oscuro">🌙</button>
+      <div class="anden-title">Andén 1</div>
+      <div class="anden-tagline">Próxima parada: Operador Comercial</div>
+    </div>
+
+    <div class="modes-grid">
+      <button class="mode-card" style="background:linear-gradient(135deg,#6D28D9,#8B5CF6)" onclick="startQuickMode()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="cuerpoTren" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#FFFFFF"/><stop offset="60%" stop-color="#E2E8F0"/><stop offset="100%" stop-color="#94A3B8"/>
+</linearGradient>
+<linearGradient id="cristalTren" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#1E293B"/><stop offset="100%" stop-color="#0F172A"/>
+</linearGradient>
+<linearGradient id="reflejoCristal" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#38BDF8" stop-opacity="0.4"/><stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<ellipse cx="32" cy="54" rx="18" ry="3" fill="#000000" opacity="0.3"/>
+<path d="M14 28c0-8 6-12 18-12s18 4 18 12v20c0 3-2 5-5 5H19c-3 0-5-2-5-5V28Z" fill="url(#cuerpoTren)" stroke="#FFFFFF" stroke-width="0.6"/>
+<path d="M17 24c0-4 4-6 15-6s15 2 15 6v10H17V24Z" fill="url(#cristalTren)" stroke="#FFFFFF" stroke-width="0.6"/>
+<path d="M17 24c0-4 4-6 15-6v16H17V24Z" fill="url(#reflejoCristal)"/>
+<rect x="14" y="38" width="36" height="5" fill="#8B5CF6" stroke="#FFFFFF" stroke-width="0.6"/>
+<circle cx="21" cy="46" r="2.5" fill="#FFF9C4" stroke="#FBCD14" stroke-width="0.6"/>
+<circle cx="21" cy="46" r="1" fill="#FFFFFF"/>
+<circle cx="43" cy="46" r="2.5" fill="#FFF9C4" stroke="#FBCD14" stroke-width="0.6"/>
+<circle cx="43" cy="46" r="1" fill="#FFFFFF"/>
+</svg><div class="mode-title">Cercanías</div><div class="mode-sub">10 preguntas · 5 min</div>
+      </button>
+      <button class="mode-card" style="background:linear-gradient(135deg,#1E40AF,#3B82F6)" onclick="goRevision()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="degradadoCarpeta" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#1D4ED8"/>
+</linearGradient>
+<linearGradient id="sombraPapel" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#F8FAFC"/><stop offset="100%" stop-color="#E2E8F0"/>
+</linearGradient>
+</defs>
+<rect x="14" y="16" width="36" height="38" rx="3" fill="#000000" opacity="0.2"/>
+<rect x="12" y="14" width="36" height="38" rx="3" fill="#1E40AF" stroke="#FFFFFF" stroke-width="0.6"/>
+<rect x="16" y="10" width="32" height="38" rx="2" fill="url(#sombraPapel)" stroke="#CBD5E1" stroke-width="0.6"/>
+<rect x="22" y="16" width="20" height="1.5" rx="0.5" fill="#94A3B8"/>
+<rect x="22" y="21" width="16" height="1.5" rx="0.5" fill="#94A3B8"/>
+<rect x="22" y="26" width="12" height="1.5" rx="0.5" fill="#94A3B8"/>
+<path d="M12 14h6l6 38h-12c-1.6 0-3-1.4-3-3V17c0-1.6 1.4-3 3-3Z" fill="url(#degradadoCarpeta)" stroke="#FFFFFF" stroke-width="0.6"/>
+<path d="M38 10h6v8l-3-2-3 2v-8Z" fill="#EF4444" stroke="#FFFFFF" stroke-width="0.6"/>
+</svg><div class="mode-title">Incidencias</div><div class="mode-sub">Repasa lo que fallaste</div>
+      </button>
+      <button class="mode-card" style="background:linear-gradient(135deg,#C2410C,#F97316)" onclick="startByBloque()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="naranjaRenfe" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#FF9F43"/><stop offset="100%" stop-color="#E67E22"/>
+</linearGradient>
+<linearGradient id="azulPantalla" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#0284C7"/><stop offset="100%" stop-color="#075985"/>
+</linearGradient>
+</defs>
+<ellipse cx="32" cy="53" rx="14" ry="2" fill="#000000" opacity="0.3"/>
+<rect x="18" y="10" width="28" height="42" rx="4" fill="url(#naranjaRenfe)" stroke="#FFFFFF" stroke-width="0.6"/>
+<path d="M18 14V12a2 2 0 0 1 2-2h24a2 2 0 0 1 2 2v2H18Z" fill="#F39C12" stroke="#FFFFFF" stroke-width="0.6"/>
+<rect x="22" y="16" width="20" height="14" rx="1" fill="#1E293B" stroke="#FFFFFF" stroke-width="0.6"/>
+<rect x="23.5" y="17.5" width="17" height="11" fill="url(#azulPantalla)"/>
+<circle cx="32" cy="23" r="2" fill="#FFFFFF" opacity="0.8"/>
+<rect x="26" y="26" width="12" height="1.5" rx="0.5" fill="#FFFFFF" opacity="0.6"/>
+<rect x="24" y="34" width="6" height="2" rx="0.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="0.5"/>
+<line x1="25" y1="35" x2="29" y2="35" stroke="#EF4444" stroke-width="0.5"/>
+<rect x="24" y="42" width="16" height="7" rx="1" fill="#334155" stroke="#FFFFFF" stroke-width="0.6"/>
+<path d="M27 44h10v3H27Z" fill="#FFFFFF"/>
+<line x1="29" y1="45.5" x2="35" y2="45.5" stroke="#FF9F43" stroke-width="0.6"/>
+</svg><div class="mode-title">Canales de Venta</div><div class="mode-sub">Practica por bloque</div>
+      </button>
+      <button class="mode-card" style="background:linear-gradient(135deg,#064E3B,#059669)" onclick="startSimulacroReal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="fondoPanel" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#1E293B"/><stop offset="100%" stop-color="#0F172A"/>
+</linearGradient>
+</defs>
+<rect x="9" y="21" width="46" height="24" rx="3" fill="#000000" opacity="0.25"/>
+<rect x="20" y="10" width="2" height="10" fill="#475569" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="42" y="10" width="2" height="10" fill="#475569" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="8" y="20" width="48" height="24" rx="3" fill="#334155" stroke="#FFFFFF" stroke-width="0.6"/>
+<rect x="11" y="23" width="42" height="18" rx="1" fill="url(#fondoPanel)" stroke="#475569" stroke-width="0.5"/>
+<g fill="#FBCD14">
+<rect x="14" y="26" width="3" height="4" rx="0.5"/>
+<rect x="19" y="26" width="22" height="1.5" rx="0.3"/>
+<rect x="19" y="28.5" width="14" height="1.5" rx="0.3"/>
+<path d="M46 26.5c0-.8.7-1.5 1.5-1.5h3c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5h-3c-.8 0-1.5-.7-1.5-1.5v-3Z" stroke="#FFFFFF" stroke-width="0.5"/>
+<circle cx="48" cy="29" r="0.5" fill="#FFFFFF"/>
+<circle cx="50" cy="29" r="0.5" fill="#FFFFFF"/>
+</g>
+<circle cx="14" cy="37" r="1" fill="#10B981"/>
+<circle cx="18" cy="37" r="1" fill="#10B981"/>
+<circle cx="22" cy="37" r="1" fill="#10B981"/>
+<rect x="26" y="36.5" width="24" height="1" rx="0.2" fill="#10B981"/>
+</svg><div class="mode-title">Final de Trayecto</div><div class="mode-sub">3 fases · 64+36+15 preg.</div>
+      </button>
+    </div>
+  </div>`;
+}
+function renderQuizShell(){
+  const prog=Math.round(((S.cur+1)/S.qs.length)*100);
+  const phaseBar=S.cfg&&S.cfg.isSimReal?`
+    <div class="phase-bar">
+      <span class="phase-pill active">${SIM_PHASES[S.cfg.phaseIdx].icon} ${SIM_PHASES[S.cfg.phaseIdx].name} · Parte ${S.cfg.phaseIdx+1} de ${SIM_PHASES.length}</span>
+    </div>`:'';
+  return`<div class="quiz">
+    ${phaseBar}
+    <div class="quiz-hdr">
+      <div class="quiz-meta">
+        <div class="quiz-blk">${S.cfg?.blkLabel||'Simulacro'}</div>
+        <div class="quiz-sub">${S.cfg?.subLabel||'Simulacro Oficial'}</div>
+      </div>
+      <div class="timer" id="tmr">⏱ ${fmt(S.tLeft)}</div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" style="width:${prog}%"></div></div>
+      <div class="prog-txt"><span>${S.cur+1}/${S.qs.length}</span><span>${prog}%</span></div>
+    </div>
+    <div id="qa"></div>
+  </div>`;
+}
+function renderQ(){
+  const el=document.getElementById('qa');if(!el)return;
+  const qi=S.cur;const q=S.qs[qi];if(!q){el.innerHTML='';return;}
+  const L=['A','B','C','D'];const rev=S.rev[qi];const c=getC(q);const opts=getO(q);
+  el.innerHTML=`<div class="q-card">
+    <div class="q-num">Pregunta ${qi+1}<span class="q-src">${q.src==='ia'?'IA':'Offline'}</span></div>
+    <div class="q-text">${q.q||q.question}</div>
+    <div class="opts">${opts.map((o,i)=>{
+      let cls='opt';
+      if(rev){if(i===c)cls+=' ok';else if(S.ans[qi]===i)cls+=' ko';}
+      else if(S.ans[qi]===i)cls+=' sel';
+      return`<button class="${cls}" ${S.ans[qi]!==undefined?'disabled':''} onclick="selAns(${qi},${i})">
+        <span class="opt-l">${L[i]}</span>${o}</button>`;
+    }).join('')}</div>
+    ${rev&&(q.e||q.explanation)?`<div class="expl"><strong>💡 Explicación</strong>${q.e||q.explanation}</div>`:''}
+  </div>`;
+  const nav=document.getElementById('qnv');if(!nav)return;
+  const ans=S.ans[qi]!==undefined;const last=S.cur===S.qs.length-1;
+  nav.innerHTML=`
+    <button class="btn btn-g btn-sm" ${S.cur===0?'disabled':''} onclick="prevQ()">← Anterior</button>
+    <div style="display:flex;gap:6px">
+      ${!ans?`<button class="btn btn-g btn-sm" onclick="skipQ()">Omitir</button>`:''}
+      ${!last?`<button class="btn btn-p btn-sm" ${!ans?'disabled':''} onclick="nextQ()">Siguiente →</button>`
+             :S.cfg&&S.cfg.isSimReal
+               ?`<button class="btn btn-p btn-sm" onclick="finishSimPhase(false)">Finalizar parte ✓</button>`
+               :`<button class="btn btn-p btn-sm" onclick="finishQuiz()">Finalizar ✓</button>`}
+      ${S.cfg&&S.cfg.isSimReal&&S.cfg.phaseIdx<SIM_PHASES.length-1?`<button class="btn btn-g btn-sm" onclick="skipToNextSimPhase()" style="font-size:.72rem">Saltar parte ⏭</button>`:''}
+    </div>`;
+}
+function renderResults(){
+  const r=S.result;const pass=r.pct>=50;
+
+  // SIMULACRO REAL multi-phase results
+  if(r.isSimReal){
+    const phasesHtml=r.phases.map(p=>`
+      <div class="phase-result">
+        <div class="phase-result-hd">
+          <div class="phase-result-icon">${p.icon}</div>
+          <div class="phase-result-name">${p.name}</div>
+          <div class="phase-result-score">${p.pct}%</div>
+        </div>
+        <div style="display:flex;gap:1rem;font-size:.8rem;color:var(--gray)">
+          <span style="color:var(--green)">✅ ${p.correct} correctas</span>
+          <span style="color:var(--m)">❌ ${p.wrong} incorrectas</span>
+          <span>⬜ ${p.skipped} omitidas</span>
+          <span>⏱ ${fmt(p.timeTaken)}</span>
+        </div>
+      </div>`).join('');
+    return`<div class="results">
+      <div class="res-hero">
+        <div class="res-score">${r.pct}%</div>
+        <div class="res-lbl">${r.correct}/${r.total} correctas totales</div>
+        <div class="res-verd">${pass?'✅ APROBADO':'❌ SUSPENSO'} · Simulacro real completo</div>
+        <div class="res-grid">
+          <div class="rs"><div class="rs-n cg">${r.correct}</div><div class="rs-l">Correctas</div></div>
+          <div class="rs"><div class="rs-n cr">${r.phases.reduce((a,p)=>a+p.wrong,0)}</div><div class="rs-l">Incorrectas</div></div>
+          <div class="rs"><div class="rs-n cs">${r.phases.reduce((a,p)=>a+p.skipped,0)}</div><div class="rs-l">Omitidas</div></div>
+        </div>
+      </div>
+      <div class="sec-hd" style="margin-bottom:.75rem">Resultados por parte</div>
+      ${phasesHtml}
+      <div style="display:flex;gap:.65rem;margin-top:1rem;flex-wrap:wrap">
+        <button class="btn btn-s btn-sm" onclick="goHome()">← Volver al inicio</button>
+        <button class="btn btn-p btn-sm" onclick="startSimulacroReal()">🔄 Repetir simulacro</button>
+      </div>
+    </div>`;
+  }
+
+  let revHtml='';
+  if(S.showRev){
+    revHtml=`<div class="sec-hd" style="margin-top:1.25rem">Revisión de respuestas</div>
+    <div class="rev-list">${r.questions.map((q,i)=>{
+      const ua=r.answers[i];const c=getC(q);const opts=getO(q);
+      const isOk=ua===c;const isSkip=ua===-1||ua===undefined;
+      const ac=isSkip?'#6B7280':isOk?'#15803D':'#7B1F5E';
+      return`<div class="rev-item" style="--ac:${ac}">
+        <div class="rev-q">${i+1}. ${q.q||q.question}</div>
+        <div class="rev-a">${isSkip?'<span style="color:#6B7280">⬜ Sin contestar</span>':
+          isOk?`<span style="color:#15803D">✅ ${opts[c]}</span>`:
+          `<span style="color:#7B1F5E">❌ Tu resp: ${opts[ua]||'?'}</span> · <span style="color:#15803D">✓ ${opts[c]}</span>`}
+        </div>
+        ${!isSkip&&!isOk&&(q.e||q.explanation)?`<div class="expl" style="margin-top:.5rem;font-size:.8rem"><strong>💡</strong>${q.e||q.explanation}</div>`:''}
+      </div>`;
+    }).join('')}</div>`;
+  }
+  return`<div class="results">
+    <div class="res-hero">
+      <div class="res-score">${r.pct}%</div>
+      <div class="res-lbl">${r.correct}/${r.total} correctas · ⏱${fmt(r.timeTaken)}</div>
+      <div class="res-verd">${pass?'✅ APROBADO':'❌ SUSPENSO'}</div>
+      <div class="res-grid">
+        <div class="rs"><div class="rs-n cg">${r.correct}</div><div class="rs-l">Correctas</div></div>
+        <div class="rs"><div class="rs-n cr">${r.wrong}</div><div class="rs-l">Incorrectas</div></div>
+        <div class="rs"><div class="rs-n cs">${r.skipped}</div><div class="rs-l">Omitidas</div></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:.65rem;margin-bottom:1rem;flex-wrap:wrap">
+      <button class="btn btn-s btn-sm" onclick="goHome()">← Volver</button>
+      <button class="btn btn-p btn-sm" onclick="toggleRev()">📋 ${S.showRev?'Ocultar':'Ver'} revisión</button>
+      <button class="btn btn-g btn-sm" onclick="openConfig()">🔄 Repetir</button>
+    </div>
+    ${revHtml}
+  </div>`;
+}
+function renderStats(te,avg){
+  const best=te?Math.max(...S.stats.exams.map(e=>e.pct)):0;
+  const totalQ=S.stats.exams.reduce((a,b)=>a+(b.total||0),0);
+  const rows=te?[...S.stats.exams].reverse().slice(0,20).map((e,i)=>`
+    <tr>
+      <td>${S.stats.exams.length-i}</td>
+      <td>${new Date(e.date).toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'})}</td>
+      <td style="font-size:.72rem;color:#6B7280;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||'Simulacro'}</td>
+      <td>${e.correct}/${e.total}</td>
+      <td><strong>${e.pct}%</strong></td>
+      <td><span class="badge ${e.pct>=50?'bg':e.pct>=35?'bo':'br'}">${e.pct>=50?'Aprobado':e.pct>=35?'Cerca':'Suspenso'}</span></td>
+    </tr>`).join('')
+    :`<tr><td colspan="6" style="text-align:center;color:#6B7280;padding:1.5rem">Sin simulacros aún</td></tr>`;
+  return`<div class="stats-pg">
+    <div class="sec-hd">📊 Mi Progreso</div>
+    <div style="display:flex;gap:.65rem;margin-bottom:1.1rem">
+      <button class="btn btn-p btn-sm" onclick="startQuickMode()">⚡ Modo rápido</button>
+      <button class="btn btn-g btn-sm" onclick="goRevision()">🔁 Revisión</button>
+    </div>
+    <div class="sg">
+      <div class="big-s"><div class="big-n">${te}</div><div class="big-l">Simulacros</div></div>
+      <div class="big-s"><div class="big-n">${avg?avg+'%':'—'}</div><div class="big-l">Media</div></div>
+      <div class="big-s"><div class="big-n">${best?best+'%':'—'}</div><div class="big-l">Mejor nota</div></div>
+      <div class="big-s"><div class="big-n">${totalQ}</div><div class="big-l">Preguntas</div></div>
+    </div>
+    <div class="sec-hd">Historial</div>
+    <div style="overflow-x:auto"><table class="tbl">
+      <thead><tr><th>#</th><th>Fecha</th><th>Test</th><th>Res.</th><th>%</th><th>Estado</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+    <div style="text-align:right;margin-top:.75rem">
+      <button class="btn btn-g btn-sm" onclick="clearStats()">🗑 Borrar historial</button>
+    </div>
+  </div>`;
+}
+function renderModal(){
+  const blkChips=BLOQUES.map(b=>`
+    <div style="margin-bottom:.6rem">
+      <div style="font-size:.7rem;font-weight:700;color:${b.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem">
+        ${b.icon} Bloque ${b.num}</div>
+      <div class="chips">${b.subs.map(s=>`
+        <button class="chip ${S.cSubs.includes(s.id)?'on':''}" onclick="toggleSub('${s.id}')"
+          style="${S.cSubs.includes(s.id)?`background:${b.color};border-color:${b.color}`:''}">
+          ${s.icon} ${s.name.split(' ').slice(0,3).join(' ')}</button>`).join('')}
+      </div>
+    </div>`).join('');
+  const psChips=`<div style="margin-bottom:.6rem">
+    <div style="font-size:.7rem;font-weight:700;color:var(--bp);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem">🧠 Psicotécnicos</div>
+    <div class="chips">${PSICO_SUBS.map(s=>`
+      <button class="chip ${S.cSubs.includes(s.id)?'on':''}" onclick="toggleSub('${s.id}')"
+        style="${S.cSubs.includes(s.id)?'background:var(--bp);border-color:var(--bp)':''}">
+        ${s.icon} ${s.name}</button>`).join('')}
+    </div>
+  </div>`;
+  const aiOpt=S.online?`<div class="modal-sec"><div class="modal-lbl">Tipo de preguntas</div>
+    <div class="chips">
+      <button class="chip ${!S.useAI?'on':''}" onclick="setAI(false)">📦 Banco offline</button>
+      <button class="chip ${S.useAI?'on':''}" onclick="setAI(true)">🤖 IA — preguntas nuevas</button>
+    </div></div>`:`<p style="font-size:.75rem;color:#6B7280;margin-bottom:.75rem">📦 Sin conexión — banco offline</p>`;
+  return`<div class="overlay" onclick="closeConfig()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-t">⚙️ Configurar simulacro</div>
+    <div class="modal-sec"><div class="modal-lbl">Selecciona subapartados</div>${blkChips}${psChips}</div>
+    <div class="modal-sec"><div class="modal-lbl">Nº de preguntas</div>
+      <div class="num-row">
+        <button class="num-btn" onclick="adjN(-5)">−</button>
+        <div class="num-v" id="nv">${S.cN}</div>
+        <button class="num-btn" onclick="adjN(5)">+</button>
+      </div></div>
+    <div class="modal-sec"><div class="modal-lbl">Tiempo límite (minutos)</div>
+      <div class="num-row">
+        <button class="num-btn" onclick="adjT(-5)">−</button>
+        <div class="num-v" id="tv">${S.cT}</div>
+        <button class="num-btn" onclick="adjT(5)">+</button>
+      </div></div>
+    ${aiOpt}
+    <div class="modal-act">
+      <button class="btn btn-g btn-sm" onclick="closeConfig()">Cancelar</button>
+      <button class="btn btn-p btn-sm" ${S.cSubs.length===0?'disabled':''} onclick="launchExam()">🚀 Empezar</button>
+    </div>
+  </div></div>`;
+}
+function goHome(){pushView(S.view);S.view='home';history.pushState({view:'home'}, '');render()}
+function goStats(){pushView(S.view);S.view='stats';history.pushState({view:'stats'}, '');render()}
+function openConfig(){S.view='config';render()}
+function closeConfig(){S.view='home';render()}
+function toggleRev(){S.showRev=!S.showRev;render()}
+function clearStats(){if(confirm('¿Borrar todo el historial?')){S.stats={exams:[]};saveStats();render()}}
+function toggleBlk(id){S.openBlks[id]=!S.openBlks[id];render()}
+function toggleSub(id){S.cSubs=S.cSubs.includes(id)?S.cSubs.filter(t=>t!==id):[...S.cSubs,id];render();}
+function setAI(v){S.useAI=v;render()}
+function adjN(d){S.cN=Math.min(40,Math.max(5,S.cN+d));const el=document.getElementById('nv');if(el)el.textContent=S.cN}
+function adjT(d){S.cT=Math.min(90,Math.max(10,S.cT+d));const el=document.getElementById('tv');if(el)el.textContent=S.cT}
+function launchExam(){
+  const label=S.cSubs.length===1?[...BLOQUES.flatMap(b=>b.subs),...PSICO_SUBS].find(s=>s.id===S.cSubs[0])?.name||'Simulacro':'Simulacro completo';
+  startQuiz({subs:S.cSubs,n:S.cN,tSec:S.cT*60,useAI:S.useAI&&S.online,label,blkLabel:'Simulacro Oficial'});
+}
+function startSubTest(subId,name,blkId){
+  const pool=QB[subId]||[];
+  const b=BLOQUES.find(b=>b.id===blkId);
+  startQuiz({subs:[subId],n:Math.min(pool.length||10,10),tSec:600,
+    useAI:S.online,label:name,blkLabel:b?`Bloque ${b.num} · ${b.icon}`:'🧠 Psicotécnicos',subLabel:name});
+}
+function prevQ(){S.cur--;renderQ();document.getElementById('scr')?.scrollTo(0,0)}
+function nextQ(){S.cur++;renderQ();document.getElementById('scr')?.scrollTo(0,0)}
+function skipQ(){S.ans[S.cur]=-1;if(S.cur<S.qs.length-1){S.cur++;renderQ();}else renderQ();}
+function doIP(){if(S.ip){S.ip.prompt();S.ip.userChoice.then(()=>{S.ip=null;S.showIP=false;render()})}}
+function dismissIP(){S.showIP=false;render()}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+// Back button / gesture handler
+window.addEventListener('popstate', () => {
+  if(NAV_STACK.length > 0){
+    const prev = NAV_STACK.pop();
+    S.view = prev;
+    // Push a new state so next back press triggers popstate again
+    history.pushState({view: S.view}, '');
+    render();
+  }
+  // If stack empty, stay on current view (don't exit app)
+  history.pushState({view: S.view}, '');
+});
+
+// Push initial state
+history.pushState({view:'home'}, '');
+
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;S.showIP=true;render()});
+window.addEventListener('online',()=>{S.online=true;render()});
+window.addEventListener('offline',()=>{S.online=false;render()});
+
+function toggleDark(){
+  S.dark=!S.dark;
+  document.body.classList.toggle('dark',S.dark);
+  localStorage.setItem('rnf_dark',S.dark?'1':'0');
+  render();
+}
+
+function startQuickMode(){
+  // Random 10 questions from all offline bank
+  const allSubs=[...BLOQUES.flatMap(b=>b.subs.map(s=>s.id)),...PSICO_SUBS.map(s=>s.id)];
+  let pool=[];
+  allSubs.forEach(sid=>(QB[sid]||[]).forEach(q=>pool.push({...q,src:'offline',sid})));
+  pool=shuffle(pool).slice(0,10).map((q,i)=>({...q,id:i}));
+  S.cfg={subs:allSubs,n:10,tSec:300,useAI:false,label:'Modo rápido',blkLabel:'⚡ Modo rápido',subLabel:'10 preguntas aleatorias'};
+  S.qs=pool;S.ans={};S.rev={};S.cur=0;S.tLeft=300;S.view='quiz';
+  clearInterval(S.tInt);
+  S.tInt=setInterval(()=>{if(--S.tLeft<=0){clearInterval(S.tInt);finishQuiz();}else updT();},1000);
+  render();
+}
+
+function goRevision(){S.view='revision';render();}
+
+function renderRevision(){
+  // Collect all wrong/skipped questions from stat exams stored in localStorage
+  // We store failed questions separately
+  let failed=[];
+  try{const s=localStorage.getItem('rnf_failed');if(s)failed=JSON.parse(s);}catch{}
+
+  if(failed.length===0){
+    return`<div class="quiz" style="padding:1.25rem">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem">
+        <button class="btn btn-g btn-sm" onclick="goHome()">← Volver</button>
+        <div class="sec-hd" style="margin:0">🔁 Modo revisión</div>
+      </div>
+      <div class="rev-mode-empty">
+        <div class="rev-icon">✅</div>
+        <div style="font-weight:600;margin-bottom:.5rem">¡Sin preguntas pendientes!</div>
+        <div style="font-size:.85rem">Las preguntas que falles o dejes sin contestar en los simulacros aparecerán aquí para que las repases.</div>
+        <button class="btn btn-p btn-sm" style="margin-top:1.25rem" onclick="openConfig()">🚀 Hacer un simulacro</button>
+      </div>
+    </div>`;
+  }
+
+  const pool=shuffle(failed).slice(0,Math.min(failed.length,20));
+  return`<div class="quiz" style="padding:1.25rem">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.65rem">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <button class="btn btn-g btn-sm" onclick="goHome()">← Volver</button>
+        <div class="sec-hd" style="margin:0">🔁 Modo revisión</div>
+      </div>
+      <div style="font-size:.78rem;color:var(--gray)">${failed.length} preguntas pendientes</div>
+    </div>
+    <div style="display:flex;gap:.65rem;margin-bottom:1.25rem;flex-wrap:wrap">
+      <button class="btn btn-p btn-sm" onclick="startRevisionExam(${Math.min(failed.length,20)})">
+        🔁 Repasar ${Math.min(failed.length,20)} preguntas
+      </button>
+      <button class="btn btn-g btn-sm" onclick="clearFailed()">🗑 Borrar lista</button>
+    </div>
+    <div style="font-size:.82rem;color:var(--gray);margin-bottom:1rem">
+      Preguntas que has fallado o dejado sin contestar en simulacros anteriores:
+    </div>
+    <div class="rev-list">
+      ${pool.map((q,i)=>{
+        const opts=q.o||q.opts||q.options||[];
+        const c=q.c!==undefined?q.c:q.correct;
+        return`<div class="rev-item" style="--ac:var(--m)">
+          <div class="rev-q">${i+1}. ${q.q||q.question}</div>
+          <div class="rev-a" style="color:var(--green)">✓ Respuesta correcta: <strong>${opts[c]}</strong></div>
+          ${q.e?`<div class="expl" style="margin-top:.5rem;font-size:.8rem"><strong>💡</strong>${q.e}</div>`:''}
+        </div>`;
+      }).join('')}
+      ${failed.length>20?`<div style="text-align:center;color:var(--gray);font-size:.8rem;padding:.75rem">
+        ... y ${failed.length-20} preguntas más. Practica para ir reduciéndolas.</div>`:''}
+    </div>
+  </div>`;
+}
+
+function startRevisionExam(n){
+  let failed=[];
+  try{const s=localStorage.getItem('rnf_failed');if(s)failed=JSON.parse(s);}catch{}
+  if(!failed.length){goHome();return;}
+  const pool=shuffle(failed).slice(0,n).map((q,i)=>({...q,id:i,src:'revision'}));
+  S.cfg={subs:[],n:pool.length,tSec:pool.length*60,useAI:false,label:'Modo revisión',blkLabel:'🔁 Modo revisión',subLabel:'Preguntas falladas'};
+  S.qs=pool;S.ans={};S.rev={};S.cur=0;S.tLeft=pool.length*60;S.view='quiz';
+  clearInterval(S.tInt);
+  S.tInt=setInterval(()=>{if(--S.tLeft<=0){clearInterval(S.tInt);finishQuiz();}else updT();},1000);
+  render();
+}
+
+function clearFailed(){
+  if(confirm('¿Borrar todas las preguntas pendientes de revisión?')){
+    localStorage.removeItem('rnf_failed');render();
+  }
+}
+
+// Save failed/skipped questions after each exam
+function saveFailedQuestions(result){
+  let failed=[];
+  try{const s=localStorage.getItem('rnf_failed');if(s)failed=JSON.parse(s);}catch{}
+  const newFailed=result.questions.filter((_,i)=>{
+    const ua=result.answers[i];
+    const c=result.questions[i].c!==undefined?result.questions[i].c:result.questions[i].correct;
+    return ua===undefined||ua===-1||ua!==c;
+  });
+  // Merge avoiding duplicates (by question text)
+  const existingQs=new Set(failed.map(q=>q.q||q.question));
+  const toAdd=newFailed.filter(q=>!existingQs.has(q.q||q.question));
+  // Remove questions that were answered correctly this time
+  const correctQs=new Set(result.questions.filter((_,i)=>{
+    const ua=result.answers[i];
+    const c=result.questions[i].c!==undefined?result.questions[i].c:result.questions[i].correct;
+    return ua===c;
+  }).map(q=>q.q||q.question));
+  const merged=[...failed.filter(q=>!correctQs.has(q.q||q.question)),...toAdd];
+  // Keep max 200
+  try{localStorage.setItem('rnf_failed',JSON.stringify(merged.slice(0,200)));}catch{}
+}
+
+
+// ── BY BLOQUE MODE ─────────────────────────────────────────────────────────
+function startByBloque(){pushView(S.view);S.view='bybloque';history.pushState({view:'bybloque'}, '');render();}
+
+function renderByBloque(){
+  const cards=BLOQUES.map(b=>`
+    <div class="blk-hdr" style="margin-bottom:.65rem;cursor:pointer" onclick="startBloqueTest('${b.id}')">
+      <div class="blk-num" style="background:${b.color}">${b.num}</div>
+      <div class="blk-info">
+        <div class="blk-title">${b.icon} ${b.title}</div>
+        <div class="blk-sub">${b.subs.length} subapartados · ${b.subs.reduce((a,s)=>(QB[s.id]||[]).length+a,0)} preguntas offline</div>
+      </div>
+      <div style="color:var(--m);font-weight:700;font-size:.85rem">▶</div>
+    </div>`).join('');
+  const pCard=`
+    <div class="blk-hdr" style="margin-bottom:.65rem;cursor:pointer" onclick="startBloqueTest('PSICO')">
+      <div class="blk-num" style="background:var(--bp)">P</div>
+      <div class="blk-info">
+        <div class="blk-title">🧠 Psicotécnicos</div>
+        <div class="blk-sub">3 tipos · ${PSICO_SUBS.reduce((a,s)=>(QB[s.id]||[]).length+a,0)} preguntas offline</div>
+      </div>
+      <div style="color:var(--m);font-weight:700;font-size:.85rem">▶</div>
+    </div>`;
+  if(S._bloqueFilter==='PSICO'){
+    delete S._bloqueFilter;
+    return`<div class="home">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-top:.25rem">
+        <div class="sec-hd" style="margin:0">🧠 Psicotécnicos</div>
+      </div>
+      <div style="font-size:.82rem;color:var(--gray);margin-bottom:1rem">Selecciona el tipo de ejercicio:</div>
+      ${pCard}
+    </div>`;
+  }
+  return`<div class="home">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;padding-top:.25rem">
+      <div class="sec-hd" style="margin:0">📚 Practicar por bloque</div>
+    </div>
+    <div style="font-size:.82rem;color:var(--gray);margin-bottom:1rem">Selecciona un bloque para hacer un test con todas sus preguntas:</div>
+    ${cards}${pCard}
+  </div>`;
+}
+
+function startBloqueTest(bloqueId){
+  let subs, label, color;
+  if(bloqueId==='PSICO'){
+    subs=PSICO_SUBS.map(s=>s.id);
+    label='Psicotécnicos';color='var(--bp)';
+  } else {
+    const b=BLOQUES.find(b=>b.id===bloqueId);
+    if(!b)return;
+    subs=b.subs.map(s=>s.id);
+    label=`Bloque ${b.num}: ${b.title}`;color=b.color;
+  }
+  let pool=[];
+  subs.forEach(sid=>(QB[sid]||[]).forEach(q=>pool.push({...q,src:'offline',sid})));
+  pool=shuffle(pool).map((q,i)=>({...q,id:i}));
+  const n=pool.length;
+  S.cfg={subs,n,tSec:n*60,useAI:S.online,label,blkLabel:'📖 Por bloque',subLabel:label};
+  S.qs=pool;S.ans={};S.rev={};S.cur=0;S.tLeft=n*60;S.view='quiz';
+  clearInterval(S.tInt);
+  S.tInt=setInterval(()=>{if(--S.tLeft<=0){clearInterval(S.tInt);finishQuiz();}else updT();},1000);
+  render();
+}
+
+// ── SIMULACRO REAL ─────────────────────────────────────────────────────────
+// Phase 0: Temario — 64 preguntas, 60 min, avisos a 30 min y 5 min restantes
+// Phase 1: Psicotécnico A (series + abstracto) — 36 preguntas, 12 min
+// Phase 2: Psicotécnico B (verbal) — 15 preguntas, 6 min
+
+const SIM_PHASES = [
+  {name:'Temario',icon:'📚',questions:64,timeSec:3600,
+   subs:['B1S1','B1S2','B1S3','B2S1','B2S2','B2S3','B2S4','B2S5','B3S1','B3S2','B3S3','B3S4','B4S1','B4S2','B4S3','B4S4','B4S5','B5S1','B5S2','B5S3','B5S4','B5S5','B5S6','B5S7'],
+   warnings:[{at:1800,msg:'⏱ Quedan 30 minutos'},{at:300,msg:'⚠️ ¡Quedan 5 minutos!'}]},
+  {name:'Psicotécnico I',icon:'🔢',questions:36,timeSec:720,
+   subs:['PS1','PS3'],warnings:[]},
+  {name:'Psicotécnico II',icon:'📝',questions:15,timeSec:360,
+   subs:['PS2'],warnings:[]},
+];
+
+function startSimulacroReal(){
+  S.simPhase=0;S.simResults=[];
+  S.view='simreal';
+  render();
+}
+
+function buildPhaseQs(phaseIdx){
+  const phase=SIM_PHASES[phaseIdx];
+  let pool=[];
+  phase.subs.forEach(sid=>(QB[sid]||[]).forEach(q=>pool.push({...q,src:'offline',sid})));
+  // If pool smaller than target, repeat questions
+  let result=[];
+  if(pool.length===0)return result;
+  while(result.length<phase.questions){
+    result=[...result,...shuffle(pool)];
+  }
+  return result.slice(0,phase.questions).map((q,i)=>({...q,id:i}));
+}
+
+function runSimPhase(phaseIdx){
+  const phase=SIM_PHASES[phaseIdx];
+  const qs=buildPhaseQs(phaseIdx);
+  S.simPhaseData=phase;
+  S.cfg={
+    subs:phase.subs,n:qs.length,tSec:phase.timeSec,
+    useAI:false,label:`Simulacro real · ${phase.name}`,
+    blkLabel:'🎯 Simulacro real',subLabel:`${phase.icon} ${phase.name}`,
+    isSimReal:true,phaseIdx,
+  };
+  S.qs=qs;S.ans={};S.rev={};S.cur=0;S.tLeft=phase.timeSec;
+  S.view='simreal_running';
+  S._warnFired={};
+  clearInterval(S.tInt);
+  S.tInt=setInterval(()=>{
+    if(--S.tLeft<=0){
+      clearInterval(S.tInt);
+      finishSimPhase(true); // time expired
+    } else {
+      // Check warnings
+      if(phase.warnings){
+        phase.warnings.forEach(w=>{
+          if(S.tLeft===w.at && !S._warnFired[w.at]){
+            S._warnFired[w.at]=true;
+            showToast(w.msg);
+          }
+        });
+      }
+      updT();
+    }
+  },1000);
+  render();
+}
+
+function showToast(msg){
+  // Remove existing toast
+  const old=document.getElementById('sim-toast');
+  if(old)old.remove();
+  const toast=document.createElement('div');
+  toast.id='sim-toast';
+  toast.className='toast';
+  toast.textContent=msg;
+  document.body.appendChild(toast);
+  setTimeout(()=>{ const t=document.getElementById('sim-toast');if(t)t.remove(); },4000);
+}
+
+function finishSimPhase(timeExpired=false){
+  clearInterval(S.tInt);
+  const phaseIdx=S.cfg.phaseIdx;
+  const q=S.qs;
+  const correct=q.filter((_,i)=>S.ans[i]===getC(q[i])).length;
+  const wrong=q.filter((_,i)=>S.ans[i]!==undefined&&S.ans[i]!==-1&&S.ans[i]!==getC(q[i])).length;
+  const skipped=q.length-correct-wrong;
+  S.simResults.push({
+    phaseIdx,name:SIM_PHASES[phaseIdx].name,icon:SIM_PHASES[phaseIdx].icon,
+    correct,wrong,skipped,total:q.length,
+    pct:Math.round(correct/q.length*100),
+    timeTaken:SIM_PHASES[phaseIdx].timeSec-S.tLeft,
+    timeExpired,questions:[...q],answers:{...S.ans},
+  });
+  saveFailedQuestions({questions:q,answers:S.ans});
+  const nextPhase=phaseIdx+1;
+  if(nextPhase>=SIM_PHASES.length){
+    // All done — show final results
+    finishSimulacroReal();
+  } else {
+    S.simPhase=nextPhase;
+    S.view='simreal';
+    render();
+  }
+}
+
+function renderSimrealPhaseEnd(){
+  const phaseIdx=S.simPhase;
+  const prevResult=S.simResults[S.simResults.length-1];
+  const nextPhase=SIM_PHASES[phaseIdx];
+  const isFirst=S.simResults.length===0;
+
+  if(isFirst){
+    // Intro screen before phase 0
+    return`<div class="phase-end">
+      <div class="phase-end-icon">🎯</div>
+      <div class="phase-end-title">Simulacro Real</div>
+      <div class="phase-end-sub">El examen consta de 3 partes. Cada parte tiene un tiempo límite. Cuando se acabe el tiempo, pasarás automáticamente a la siguiente parte.</div>
+      <div style="background:#fff;border-radius:10px;padding:1rem;margin-bottom:1.5rem;border:1px solid var(--gl)">
+        ${SIM_PHASES.map((p,i)=>`
+        <div style="display:flex;align-items:center;gap:.75rem;padding:.6rem 0;${i<SIM_PHASES.length-1?'border-bottom:1px solid var(--gl)':''}">
+          <div style="font-size:1.2rem">${p.icon}</div>
+          <div><div style="font-weight:600;font-size:.85rem">${p.name}</div>
+          <div style="font-size:.75rem;color:var(--gray)">${p.questions} preguntas · ${Math.round(p.timeSec/60)} minutos</div></div>
+        </div>`).join('')}
+      </div>
+      <div class="phase-end-btns">
+        <button class="btn btn-p" style="width:100%;justify-content:center" onclick="runSimPhase(0)">🚀 Comenzar el examen</button>
+        <button class="btn btn-g btn-sm" onclick="goHome()">← Cancelar</button>
+      </div>
+    </div>`;
+  }
+
+  // Between phases
+  const prev=SIM_PHASES[phaseIdx-1];
+  return`<div class="phase-end">
+    <div class="phase-end-icon">${prevResult.timeExpired?'⏰':'✅'}</div>
+    <div class="phase-end-title">${prevResult.timeExpired?'Tiempo agotado':'Parte completada'}</div>
+    <div class="phase-end-sub">
+      <strong>${prev.icon} ${prev.name}</strong><br>
+      ${prevResult.correct}/${prevResult.total} correctas · ${prevResult.pct}%<br>
+      ${prevResult.timeExpired?'Se ha agotado el tiempo de esta parte.':'Has terminado antes del tiempo límite.'}
+    </div>
+    <div style="background:#fff;border-radius:10px;padding:1rem;margin-bottom:1.5rem;border:1px solid var(--gl);text-align:left">
+      <div style="font-weight:600;font-size:.82rem;color:var(--gray);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.5px">Siguiente parte</div>
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <div style="font-size:1.4rem">${nextPhase.icon}</div>
+        <div>
+          <div style="font-weight:700;font-size:.95rem">${nextPhase.name}</div>
+          <div style="font-size:.78rem;color:var(--gray)">${nextPhase.questions} preguntas · ${Math.round(nextPhase.timeSec/60)} minutos</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-end-btns">
+      <button class="btn btn-p" style="width:100%;justify-content:center" onclick="runSimPhase(${phaseIdx})">▶ Empezar ${nextPhase.name}</button>
+      <button class="btn btn-g btn-sm" onclick="abandonSimulacro()">Abandonar examen</button>
+    </div>
+  </div>`;
+}
+
+function abandonSimulacro(){
+  if(confirm('¿Abandonar el simulacro real? Los resultados parciales se perderán.')){
+    clearInterval(S.tInt);
+    S.simResults=[];S.simPhase=0;
+    goHome();
+  }
+}
+
+function finishSimulacroReal(){
+  const totalCorrect=S.simResults.reduce((a,r)=>a+r.correct,0);
+  const totalQ=S.simResults.reduce((a,r)=>a+r.total,0);
+  const pct=Math.round(totalCorrect/totalQ*100);
+  S.stats.exams.push({date:Date.now(),correct:totalCorrect,total:totalQ,pct,label:'Simulacro real completo'});
+  saveStats();
+  S.result={
+    isSimReal:true,
+    phases:S.simResults,
+    correct:totalCorrect,total:totalQ,pct,
+    timeTaken:S.simResults.reduce((a,r)=>a+r.timeTaken,0),
+  };
+  S.showRev=false;
+  S.view='results';
+  render();
+}
+
+
+function skipToNextSimPhase(){
+  if(!S.cfg||!S.cfg.isSimReal)return;
+  const nextIdx=S.cfg.phaseIdx+1;
+  if(nextIdx>=SIM_PHASES.length){
+    if(confirm('¿Finalizar el examen? Las preguntas sin contestar contarán como omitidas.')){
+      finishSimPhase(false);
+    }
+    return;
+  }
+  if(confirm('¿Saltar a la siguiente parte? Las preguntas sin contestar contarán como omitidas.')){
+    finishSimPhase(false);
+  }
+}
+function startPsicoBloque(){
+  S.view='bybloque';
+  S._bloqueFilter='PSICO';
+  render();
+}
+Object.assign(window,{goHome,goStats,openConfig,closeConfig,toggleRev,clearStats,
+  toggleBlk,toggleSub,setAI,adjN,adjT,launchExam,startSubTest,
+  prevQ,nextQ,skipQ,finishQuiz,selAns,doIP,dismissIP,
+  toggleDark,startQuickMode,goRevision,startRevisionExam,clearFailed,
+  startByBloque,startBloqueTest,startSimulacroReal,runSimPhase,
+  finishSimPhase,abandonSimulacro});
+// Apply dark on load
+if(S.dark)document.body.classList.add('dark');
+render();
+</script>
+</body>
+</html>
