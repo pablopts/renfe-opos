@@ -1,4 +1,4 @@
-const CACHE = 'renfe-opos-20250627';
+const CACHE = 'renfe-opos-20250629';
 const ASSETS = [
   '/renfe-opos/',
   '/renfe-opos/index.html',
