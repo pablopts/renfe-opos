@@ -227,13 +227,17 @@ function back(){
   if(S.tBloque){S.tBloque=null;render();return;}
   if(S.tab!=='inicio'){S.tab='inicio';render();return;}
 }
-window.addEventListener('popstate',()=>{back();history.pushState({a:1},'');});
+window.addEventListener('popstate',e=>{
+  back();
+  // Siempre reponemos el escudo para que el siguiente "atrás" no salga de la app
+  history.pushState({a:1},'');
+});
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
 function toggleDark(){S.dark=!S.dark;try{localStorage.setItem('rnf_dark',S.dark?'1':'0')}catch{};render();}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;render();});
 function instalar(){if(S.ip){S.ip.prompt();S.ip.userChoice.then(()=>{S.ip=null;render();});}}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 
-history.replaceState({a:0},'');history.pushState({a:1},'');
+history.replaceState({a:0},'');history.pushState({a:1},'');history.pushState({a:2},'');
 render();
 loadMat().then(()=>{if(MAT&&!S.tema)S.tema=temas()[0]?.id;render();});
