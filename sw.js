@@ -1,47 +1,8 @@
-const CACHE = 'renfe-opos-20261021';
-const ASSETS = [
-  '/renfe-opos/',
-  '/renfe-opos/index.html',
-  '/renfe-opos/app.js',
-  '/renfe-opos/manifest.json',
-  '/renfe-opos/temario-data.js'
-];
-
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS).catch(() => {}))
-  );
-  // Force immediate activation without waiting
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => {
-        console.log('Deleting old cache:', k);
-        return caches.delete(k);
-      }))
-    )
-  );
-  // Take control of all clients immediately
-  self.clients.claim();
-});
-
+const CACHE = 'anden1-estudio-20261022';
+const ASSETS = ['/renfe-opos/','/renfe-opos/index.html','/renfe-opos/app.js','/renfe-opos/manifest.json'];
+self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS).catch(() => {}))); self.skipWaiting(); });
+self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))); self.clients.claim(); });
 self.addEventListener('fetch', e => {
-  if (e.request.url.includes('anthropic.com')) return;
-  if (e.request.url.includes('fonts.googleapis') || e.request.url.includes('fonts.gstatic')) {
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-    return;
-  }
-  // Network first, then cache
-  e.respondWith(
-    fetch(e.request)
-      .then(res => {
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
-        return res;
-      })
-      .catch(() => caches.match(e.request))
-  );
+  if (e.request.method !== 'GET') return;
+  e.respondWith(fetch(e.request).then(res => { const clone = res.clone(); caches.open(CACHE).then(c => c.put(e.request, clone)); return res; }).catch(() => caches.match(e.request)));
 });

@@ -20,7 +20,7 @@ const TAGS={ya_preguntado:['Ya preguntado','t-ya'],trampa:['Trampa','t-tr'],clav
 /* ---------- estado ---------- */
 const S={tab:'inicio', sub:null, tema:null, grupo:'', soloTag:'', q:[], cur:null, flip:false, done:0, libre:false,
   cmp:null, caso:null, ver:false, buscar:'', tBloque:null, tSub:null, dark:false, ip:null};
-let MAT=null, LOADED=false, TEMARIO=null, TEMARIO_ERR=false;
+let MAT=null, LOADED=false;
 try{S.dark=localStorage.getItem('rnf_dark')==='1'}catch{}
 
 /* ---------- almacenamiento ---------- */
@@ -63,7 +63,7 @@ async function importar(file){
     cur.temas.sort((a,b)=>a.id.localeCompare(b.id));
     await dbSet(KEY,cur);MAT=cur;S.tema=data.temas[0].id;S.grupo='';
     try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch{}
-    toast('Material importado: '+data.temas.map(t=>t.titulo).join(', '));
+    toast('Material importado: '+data.temas.length+(data.temas.length>1?' temas':' tema'));
     S.sub=null;render();
   }catch(e){alert('No se pudo importar: '+e.message);}
 }
@@ -98,15 +98,8 @@ function calificar(g){ // 0 otra vez, 1 difícil, 2 bien, 3 fácil
   S.cur=S.q.length?S.q[0]:null;S.flip=false;render();toTop();
 }
 
-/* ---------- temario ---------- */
-function loadTemario(){
-  if(TEMARIO||document.querySelector('script[src*="temario-data.js"]'))return;
-  const s=document.createElement('script');s.src='temario-data.js';
-  s.onload=()=>{TEMARIO=window.TEMARIO_FULL||{};render();};
-  s.onerror=()=>{TEMARIO_ERR=true;render();};
-  document.head.appendChild(s);
-}
-
+/* ---------- temario (el del alumno, viene en el material importado) ---------- */
+function bloqueDe(tid){return BLOQUES[parseInt(tid.slice(1))-1]||{color:'var(--m)',icon:'📘',num:tid.slice(1)};}
 /* ---------- piezas comunes ---------- */
 function head(titulo,kicker,back){
   return `<div class="hd">${back?`<button class="btn btn-g btn-sm" onclick="${back}">← Volver</button>`:''}<div class="hd-t"><div class="kick">${esc(kicker||'')}</div><div class="tit">${titulo}</div></div></div>`;
@@ -193,22 +186,28 @@ function vCasos(){
   return `<div class="pad">${head('🎫 Casos prácticos',t.titulo)}<div class="filtros">${selTema()}${selGrupo()}</div>${html}</div>`;
 }
 function vTemario(){
-  if(S.tSub){
-    loadTemario();
-    const b=BLOQUES.find(b=>b.subs.some(s=>s.id===S.tSub)),s=b.subs.find(s=>s.id===S.tSub);
-    const body=TEMARIO?(TEMARIO[S.tSub]||'<p>Contenido no disponible.</p>'):(TEMARIO_ERR?'<p>No se pudo cargar el temario. Comprueba la conexión la primera vez que lo abras.</p>':'<div class="loader"><div class="spin"></div></div>');
-    return `<div class="pad">${head(esc(s.name),'Bloque '+b.num,'S.tSub=null;render()')}<div class="box temario">${body}</div></div>`;
+  if(!MAT)return `<div class="pad">${head('📚 Mi temario','Lectura')}${sinMaterial()}</div>`;
+  const ts=temas().filter(t=>t.temario&&t.temario.length);
+  if(!ts.length)return `<div class="pad">${head('📚 Mi temario','Lectura')}<div class="box"><p>El material importado no trae tu temario. Importa la versión nueva del archivo de material.</p><button class="btn btn-p" style="margin-top:.6rem" onclick="pedirArchivo()">📥 Importar material</button></div></div>`;
+  if(S.tBloque){
+    const t=ts.find(x=>x.id===S.tBloque); if(!t){S.tBloque=null;return vTemario();}
+    if(S.tSub!=null){
+      const s=t.temario[S.tSub];
+      return `<div class="pad">${head(esc(s.titulo),t.titulo,'S.tSub=null;render()')}<div class="box temario">${s.html}</div>
+        <div class="row2">${S.tSub>0?`<button class="btn btn-g btn-sm" onclick="S.tSub--;render();toTop()">‹ Anterior</button>`:'<span></span>'}${S.tSub<t.temario.length-1?`<button class="btn btn-g btn-sm" onclick="S.tSub++;render();toTop()">Siguiente ›</button>`:''}</div></div>`;
+    }
+    let html='',g0=null;
+    t.temario.forEach((s,i)=>{if(s.grupo&&s.grupo!==g0){html+=`<div class="gh">${esc(s.grupo)}</div>`;}g0=s.grupo;
+      html+=`<div class="item" onclick="S.tSub=${i};go();render();toTop()"><div class="it-t">${esc(s.titulo)}</div><span>›</span></div>`;});
+    return `<div class="pad">${head(esc(t.titulo),'Mi temario','S.tBloque=null;render()')}${html}</div>`;
   }
-  if(S.tBloque){const b=BLOQUES.find(x=>x.id===S.tBloque);
-    return `<div class="pad">${head(b.icon+' '+esc(b.title),'Bloque '+b.num,'S.tBloque=null;render()')}
-      ${b.subs.map(s=>`<div class="item" onclick="S.tSub='${s.id}';go();render();toTop()"><div class="it-t">${esc(s.name)}</div><span>›</span></div>`).join('')}</div>`;}
-  loadTemario();
-  return `<div class="pad">${head('📚 Temario oficial','Lectura')}
-    ${BLOQUES.map(b=>`<div class="item" onclick="S.tBloque='${b.id}';go();render();toTop()"><div class="num" style="background:${b.color}">${b.num}</div><div style="flex:1"><div class="it-t">${b.icon} ${esc(b.title)}</div><div class="it-s">${b.subs.length} apartados</div></div><span>›</span></div>`).join('')}</div>`;
+  return `<div class="pad">${head('📚 Mi temario','Tus resúmenes con las notas de clase')}
+    <div class="leyenda"><span class="nota n-ya">Ya preguntado</span><span class="nota n-clave">Clave de clase</span><span class="nota n-truco">Truco</span><span class="nota n-ojo">Ojo con el temario</span><span class="nota n-nopri">No priorizar</span></div>
+    ${ts.map(t=>{const b=bloqueDe(t.id);return `<div class="item" onclick="S.tBloque='${t.id}';S.tSub=null;go();render();toTop()"><div class="num" style="background:${b.color}">${b.num}</div><div style="flex:1"><div class="it-t">${esc(t.titulo)}</div><div class="it-s">${t.temario.length} apartados</div></div><span>›</span></div>`}).join('')}</div>`;
 }
 
 /* ---------- render y navegación ---------- */
-const TABS=[['inicio','🃏','Tarjetas'],['trucos','💡','Trucos'],['esquemas','📊','Esquemas'],['casos','🎫','Casos'],['temario','📚','Temario']];
+const TABS=[['inicio','🃏','Tarjetas'],['temario','📚','Temario'],['trucos','💡','Trucos'],['esquemas','📊','Esquemas'],['casos','🎫','Casos']];
 function render(){
   document.body.classList.toggle('dark',S.dark);
   let v;
@@ -224,7 +223,7 @@ function back(){
   if(S.sub==='sesion'){salirSesion();return;}
   if(S.cmp!=null){S.cmp=null;render();return;}
   if(S.caso!=null){S.caso=null;S.ver=false;render();return;}
-  if(S.tSub){S.tSub=null;render();return;}
+  if(S.tSub!=null){S.tSub=null;render();return;}
   if(S.tBloque){S.tBloque=null;render();return;}
   if(S.tab!=='inicio'){S.tab='inicio';render();return;}
 }
