@@ -220,16 +220,17 @@ function render(){
 function setTab(k){if(S.tab===k&&!S.cmp&&S.caso==null&&!S.tBloque)return toTop();S.tab=k;S.cmp=null;S.caso=null;S.ver=false;S.tBloque=null;S.tSub=null;S.buscar='';go();render();toTop();}
 function salirSesion(){S.sub=null;S.cur=null;render();toTop();}
 function back(){
-  if(S.sub==='sesion'){salirSesion();return;}
-  if(S.cmp!=null){S.cmp=null;render();return;}
-  if(S.caso!=null){S.caso=null;S.ver=false;render();return;}
-  if(S.tSub!=null){S.tSub=null;render();return;}
-  if(S.tBloque){S.tBloque=null;render();return;}
-  if(S.tab!=='inicio'){S.tab='inicio';render();return;}
+  if(S.sub==='sesion'){salirSesion();return true;}
+  if(S.cmp!=null){S.cmp=null;render();return true;}
+  if(S.caso!=null){S.caso=null;S.ver=false;render();return true;}
+  if(S.tSub!=null){S.tSub=null;render();return true;}
+  if(S.tBloque){S.tBloque=null;render();return true;}
+  if(S.tab!=='inicio'){S.tab='inicio';render();return true;}
+  return false;
 }
-window.addEventListener('popstate',e=>{
+window.addEventListener('popstate',()=>{
   back();
-  // Siempre reponemos el escudo para que el siguiente "atrás" no salga de la app
+  // Siempre reponemos el escudo: nunca dejamos que el historial se agote
   history.pushState({a:1},'');
 });
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
@@ -238,6 +239,8 @@ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;rend
 function instalar(){if(S.ip){S.ip.prompt();S.ip.userChoice.then(()=>{S.ip=null;render();});}}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 
-history.replaceState({a:0},'');history.pushState({a:1},'');history.pushState({a:2},'');
+// Metemos suficientes estados en el historial para que el botón atrás nunca agote la pila
+history.replaceState({a:0},'');
+for(let i=1;i<=10;i++)history.pushState({a:i},'');
 render();
 loadMat().then(()=>{if(MAT&&!S.tema)S.tema=temas()[0]?.id;render();});
