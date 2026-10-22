@@ -229,9 +229,9 @@ function back(){
   return false;
 }
 window.addEventListener('popstate',()=>{
-  back();
-  // Siempre reponemos el escudo: nunca dejamos que el historial se agote
+  // Reponemos el estado ANTES de procesar, para que Android nunca vea el historial vacío
   history.pushState({a:1},'');
+  back();
 });
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
 function toggleDark(){S.dark=!S.dark;try{localStorage.setItem('rnf_dark',S.dark?'1':'0')}catch{};render();}
