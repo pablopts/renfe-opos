@@ -89,14 +89,19 @@ body.dark .kick{color:#D49AC4}
 .aj-row{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--gray);padding:.3rem 0}
 .lnk{background:none;border:none;text-align:left;font:inherit;font-size:.82rem;color:var(--gray);padding:.45rem 0;cursor:pointer}
 /* ── grid inicio ── */
-.inicio-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1rem}
-@media(max-width:480px){.inicio-grid{grid-template-columns:repeat(2,1fr)}.inicio-grid .i-card:last-child{grid-column:1/-1;max-width:50%;justify-self:center}}
-.i-card{border:none;border-radius:20px;padding:16px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;position:relative;transition:transform .12s,box-shadow .12s;-webkit-tap-highlight-color:transparent}
+.inicio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:1rem}
+.inicio-grid .i-card:last-child{grid-column:1/-1;max-width:calc(50% - 5px);justify-self:center}
+.i-card{border:none;border-radius:20px;padding:16px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;width:100%;aspect-ratio:1;justify-content:center;transition:transform .12s;-webkit-tap-highlight-color:transparent}
 .i-card:active{transform:scale(.96)}
 .i-card svg{width:72px;height:72px;display:block}
-.i-lbl{font-size:.65rem;font-weight:700;text-align:center;color:#fff;line-height:1.2}
+.i-lbl{font-size:.68rem;font-weight:700;text-align:center;color:#fff;line-height:1.2}
 .i-lbl-dk{color:#1a1a1a}
-.i-badge{display:block;font-size:.58rem;font-weight:800;background:#fff3;color:#fff;border-radius:9px;padding:.1rem .45rem;margin-top:2px}
+/* ── panel info ── */
+.info-panel{background:var(--card);border-radius:14px;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.1rem}
+.info-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.info-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--m);color:#fff;font-size:.85rem;font-weight:900;font-style:italic;line-height:1}
+body.dark .info-icon{background:#D49AC4;color:#1a1a2e}
+.info-titulo{font-size:.8rem;font-weight:700;color:var(--gray)}
 .flash{min-height:230px;cursor:pointer}
 .grp{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--m);margin-bottom:.4rem}body.dark .grp{color:#D49AC4}
 .q{font-size:1.1rem;font-weight:600;margin:.4rem 0}
