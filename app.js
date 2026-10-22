@@ -228,11 +228,18 @@ function back(){
   if(S.tab!=='inicio'){S.tab='inicio';render();return true;}
   return false;
 }
-window.addEventListener('popstate',()=>{
-  // Reponemos el estado ANTES de procesar, para que Android nunca vea el historial vacío
-  history.pushState({a:1},'');
-  back();
-});
+if('navigation' in window){
+  navigation.addEventListener('navigate',e=>{
+    if(e.navigationType==='traverse'&&e.destination.index<navigation.currentEntry.index){
+      e.intercept({handler:async()=>{back();}});
+    }
+  });
+}else{
+  window.addEventListener('popstate',()=>{
+    history.pushState({a:1},'');
+    back();
+  });
+}
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
 function toggleDark(){S.dark=!S.dark;try{localStorage.setItem('rnf_dark',S.dark?'1':'0')}catch{};render();}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;render();});
