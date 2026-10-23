@@ -228,9 +228,7 @@ function render(){
   let v;
   if(S.sub==='sesion')v=vSesion();
   else v={inicio:vInicio,trucos:vTrucos,esquemas:vEsquemas,casos:vCasos,temario:vTemario}[S.tab]();
-  const enSesion=S.sub==='sesion';
-  document.getElementById('app').innerHTML=`<div class="screen" id="scr">${v}</div>
-    ${enSesion?'':`<nav class="tabs">${TABS.map(([k,i,l])=>`<button class="tab ${S.tab===k?'on':''}" onclick="setTab('${k}')"><span>${i}</span>${l}</button>`).join('')}</nav>`}`;
+  document.getElementById('app').innerHTML=`<div class="screen" id="scr">${v}</div>`;
   }catch(e){document.getElementById('app').innerHTML='<div style="padding:2rem;color:red;font-size:.8rem;word-break:break-all">ERROR: '+e.message+'<br>'+e.stack+'</div>';}
 }
 function setTab(k){if(S.tab===k&&!S.cmp&&S.caso==null&&!S.tBloque)return toTop();S.tab=k;S.cmp=null;S.caso=null;S.ver=false;S.tBloque=null;S.tSub=null;S.buscar='';go();render();toTop();}
