@@ -114,7 +114,7 @@ function sinMaterial(){
 
 /* ---------- vistas ---------- */
 function vInicio(){
-  const brand=`<div class="brand"><button class="dark-toggle" onclick="toggleDark()">${S.dark?'☀️':'🌙'}</button><button class="info-toggle" onclick="toggleInfo()" aria-label="Ajustes">ℹ</button><div class="anden-title">Andén 1</div><div class="anden-tagline">Próxima parada: Operador Comercial</div></div>`;
+  const brand=`<div class="brand"><button class="dark-toggle" onclick="toggleDark()">${S.dark?'☀️':'🌙'}</button><div class="info-wrap"><button class="info-toggle" onclick="toggleInfo(event)" aria-label="Ajustes">ℹ</button><div class="info-panel" style="display:${S.infoOpen?'flex':'none'}"><div class="aj-row">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf&&cf.nuevas||20}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div><button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button><button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button><button class="lnk" onclick="borrarMaterial()">🗑 Borrar material del dispositivo</button>${S.ip?'<button class="lnk" onclick="instalar()">📱 Instalar como app</button>':''}</div></div><div class="anden-title">Andén 1</div><div class="anden-tagline">Próxima parada: Operador Comercial</div></div>`;
   if(!LOADED)return brand+`<div class="loader"><div class="spin"></div></div>`;
   if(!MAT||!temas().length)return brand+`<div class="pad">${sinMaterial()}</div>`;
   const c=counts(),cf=cfg(),tot=c.vistas+c.nue,pct=tot?Math.round(c.vistas*100/tot):0;
@@ -145,14 +145,7 @@ function vInicio(){
       <div class="i-lbl i-lbl-dk">Casos en ruta</div>
     </button>
   </div>`;
-  const info=`<div class="info-panel" style="display:${S.infoOpen?'flex':'none'}">
-    <div class="aj-row">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf.nuevas}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div>
-    <button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button>
-    <button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button>
-    <button class="lnk" onclick="borrarMaterial()">🗑 Borrar material del dispositivo</button>
-    ${S.ip?`<button class="lnk" onclick="instalar()">📱 Instalar como app</button>`:''}
-  </div>`;
-  return brand+`<div class="pad">${grid}${info}</div>`;
+  return brand+`<div class="pad">${grid}</div>`;
 }
 function vSesion(){
   if(!S.cur)return `<div class="pad">${head('Sesión terminada','', 'salirSesion()')}<div class="box center"><div style="font-size:2.5rem">🎉</div><p><b>${S.done}</b> tarjetas repasadas.</p><button class="btn btn-p" onclick="salirSesion()">Volver</button></div></div>`;
@@ -261,7 +254,8 @@ if('navigation' in window){
 }
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
 function toggleDark(){S.dark=!S.dark;try{localStorage.setItem('rnf_dark',S.dark?'1':'0')}catch{};render();}
-function toggleInfo(){S.infoOpen=!S.infoOpen;render();}
+function toggleInfo(e){e&&e.stopPropagation();S.infoOpen=!S.infoOpen;render();if(S.infoOpen){setTimeout(()=>document.addEventListener('click',_closeInfo,{once:true}),0);}}
+function _closeInfo(){S.infoOpen=false;render();}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;render();});
 function instalar(){if(S.ip){S.ip.prompt();S.ip.userChoice.then(()=>{S.ip=null;render();});}}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
