@@ -19,7 +19,7 @@ const TAGS={ya_preguntado:['Ya preguntado','t-ya'],trampa:['Trampa','t-tr'],clav
 
 /* ---------- estado ---------- */
 const S={tab:'inicio', sub:null, tema:null, grupo:'', soloTag:'', q:[], cur:null, flip:false, done:0, libre:false,
-  cmp:null, caso:null, ver:false, buscar:'', tBloque:null, tSub:null, dark:false, ip:null};
+  cmp:null, caso:null, ver:false, buscar:'', tBloque:null, tSub:null, dark:false, ip:null, infoOpen:false};
 let MAT=null, LOADED=false;
 try{S.dark=localStorage.getItem('rnf_dark')==='1'}catch{}
 
@@ -114,7 +114,7 @@ function sinMaterial(){
 
 /* ---------- vistas ---------- */
 function vInicio(){
-  const brand=`<div class="brand"><button class="dark-toggle" onclick="toggleDark()">${S.dark?'☀️':'🌙'}</button><div class="anden-title">Andén 1</div><div class="anden-tagline">Próxima parada: Operador Comercial</div></div>`;
+  const brand=`<div class="brand"><button class="dark-toggle" onclick="toggleDark()">${S.dark?'☀️':'🌙'}</button><button class="info-toggle" onclick="toggleInfo()" aria-label="Ajustes">ℹ</button><div class="anden-title">Andén 1</div><div class="anden-tagline">Próxima parada: Operador Comercial</div></div>`;
   if(!LOADED)return brand+`<div class="loader"><div class="spin"></div></div>`;
   if(!MAT||!temas().length)return brand+`<div class="pad">${sinMaterial()}</div>`;
   const c=counts(),cf=cfg(),tot=c.vistas+c.nue,pct=tot?Math.round(c.vistas*100/tot):0;
@@ -145,8 +145,7 @@ function vInicio(){
       <div class="i-lbl i-lbl-dk">Casos en ruta</div>
     </button>
   </div>`;
-  const info=`<div class="info-panel">
-    <div class="info-header"><span class="info-icon">ℹ</span><span class="info-titulo">Ajustes</span></div>
+  const info=`<div class="info-panel${S.infoOpen?' info-open':''}">
     <div class="aj-row">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf.nuevas}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div>
     <button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button>
     <button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button>
@@ -262,6 +261,7 @@ if('navigation' in window){
 }
 function setNuevas(d){const c=cfg();c.nuevas=Math.max(5,Math.min(100,c.nuevas+d));lsSet('rnf_srs_cfg',c);render();}
 function toggleDark(){S.dark=!S.dark;try{localStorage.setItem('rnf_dark',S.dark?'1':'0')}catch{};render();}
+function toggleInfo(){S.infoOpen=!S.infoOpen;render();}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();S.ip=e;render();});
 function instalar(){if(S.ip){S.ip.prompt();S.ip.userChoice.then(()=>{S.ip=null;render();});}}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});

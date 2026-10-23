@@ -63,6 +63,8 @@ body{font-family:"Geist",system-ui,sans-serif;background:var(--cream);color:var(
 body.dark .anden-title{color:#D49AC4}
 .anden-tagline{font-family:"NewTitle",serif;font-size:.92rem;font-weight:300;color:var(--gray)}
 .dark-toggle{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer}
+.info-toggle{position:absolute;top:1rem;right:3.2rem;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--m);color:#fff;border:none;font-size:.95rem;font-weight:900;font-style:italic;cursor:pointer;line-height:1}
+body.dark .info-toggle{background:#D49AC4;color:#1a1a2e}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;font-size:.9rem;padding:11px 18px}
 .btn-p{background:var(--m);color:#fff}.btn-p:active{transform:scale(.97)}
 .btn-g{background:transparent;color:var(--gray);border:1.5px solid var(--line)}
@@ -97,11 +99,8 @@ body.dark .kick{color:#D49AC4}
 .i-lbl{font-size:.68rem;font-weight:700;text-align:center;color:#fff;line-height:1.2}
 .i-lbl-dk{color:#1a1a1a}
 /* ── panel info ── */
-.info-panel{background:var(--card);border-radius:14px;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.1rem}
-.info-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
-.info-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--m);color:#fff;font-size:.85rem;font-weight:900;font-style:italic;line-height:1}
-body.dark .info-icon{background:#D49AC4;color:#1a1a2e}
-.info-titulo{font-size:.8rem;font-weight:700;color:var(--gray)}
+.info-panel{background:var(--card);border-radius:14px;padding:0 1rem;max-height:0;overflow:hidden;display:flex;flex-direction:column;gap:.1rem;transition:max-height .25s ease,padding .25s ease}
+.info-panel.info-open{max-height:340px;padding:.9rem 1rem}
 .flash{min-height:230px;cursor:pointer}
 .grp{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--m);margin-bottom:.4rem}body.dark .grp{color:#D49AC4}
 .q{font-size:1.1rem;font-weight:600;margin:.4rem 0}
