@@ -115,7 +115,7 @@ function sinMaterial(){
 /* ---------- vistas ---------- */
 function vInicio(){
   const cf=cfg();
-  const popover=`<div class="info-wrap"><button class="info-toggle" onclick="toggleInfo(event)" aria-label="Ajustes">ℹ</button><div class="info-panel" style="display:${S.infoOpen?'flex':'none'}"><div class="aj-row">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf.nuevas}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div><button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button><button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button><button class="lnk" onclick="borrarMaterial()">🗑 Borrar material del dispositivo</button>${S.ip?'<button class="lnk" onclick="instalar()">📱 Instalar como app</button>':''}</div></div>`;
+  const popover=`<div class="info-wrap"><button class="info-toggle" onclick="toggleInfo(event)" aria-label="Ajustes">ℹ</button><div class="info-panel" style="display:${S.infoOpen?'flex':'none'}"><button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button><button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button><button class="lnk" onclick="borrarMaterial()">🗑 Borrar material del dispositivo</button>${S.ip?'<button class="lnk" onclick="instalar()">📱 Instalar como app</button>':''}</div></div>`;
   const brand=`<div class="brand">${popover}<div class="anden-title">Andén 1</div><div class="anden-tagline">Próxima parada: Operador Comercial</div></div>`;
   if(!LOADED)return brand+`<div class="loader"><div class="spin"></div></div>`;
   if(!MAT||!temas().length)return brand+`<div class="pad">${sinMaterial()}</div>`;
@@ -150,7 +150,8 @@ function vInicio(){
   return brand+`<div class="pad">${grid}</div>`;
 }
 function vSesion(){
-  if(!S.cur)return `<div class="pad">${head('Sesión terminada','', 'salirSesion()')}<div class="box center"><div style="font-size:2.5rem">🎉</div><p><b>${S.done}</b> tarjetas repasadas.</p><button class="btn btn-p" onclick="salirSesion()">Volver</button></div></div>`;
+  const cf=cfg();
+  if(!S.cur)return `<div class="pad">${head('Sesión terminada','', 'salirSesion()')}<div class="box center"><div style="font-size:2.5rem">🎉</div><p><b>${S.done}</b> tarjetas repasadas.</p><div class="aj-row" style="margin:.8rem 0">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf.nuevas}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div><button class="btn btn-p" onclick="salirSesion()">Volver</button></div></div>`;
   const c=S.cur,st=srs()[c.id],pv=g=>(S.libre||!st||st.i===0)?'':`<small>${nextIvl(st,g)} d</small>`;
   return `<div class="pad">${head(S.libre?'Repaso libre':'Sesión de tarjetas',S.q.length+' pendientes','salirSesion()')}
     <div class="box flash" onclick="${S.flip?'':'voltear()'}">
