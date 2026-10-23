@@ -223,6 +223,7 @@ function vTemario(){
 /* ---------- render y navegación ---------- */
 const TABS=[['inicio','🃏','Tarjetas'],['temario','📚','Temario'],['trucos','💡','Trucos'],['esquemas','📊','Esquemas'],['casos','🎫','Casos']];
 function render(){
+  try{
   document.body.classList.toggle('dark',S.dark);
   let v;
   if(S.sub==='sesion')v=vSesion();
@@ -230,6 +231,7 @@ function render(){
   const enSesion=S.sub==='sesion';
   document.getElementById('app').innerHTML=`<div class="screen" id="scr">${v}</div>
     ${enSesion?'':`<nav class="tabs">${TABS.map(([k,i,l])=>`<button class="tab ${S.tab===k?'on':''}" onclick="setTab('${k}')"><span>${i}</span>${l}</button>`).join('')}</nav>`}`;
+  }catch(e){document.getElementById('app').innerHTML='<div style="padding:2rem;color:red;font-size:.8rem;word-break:break-all">ERROR: '+e.message+'<br>'+e.stack+'</div>';}
 }
 function setTab(k){if(S.tab===k&&!S.cmp&&S.caso==null&&!S.tBloque)return toTop();S.tab=k;S.cmp=null;S.caso=null;S.ver=false;S.tBloque=null;S.tSub=null;S.buscar='';go();render();toTop();}
 function salirSesion(){S.sub=null;S.cur=null;render();toTop();}
