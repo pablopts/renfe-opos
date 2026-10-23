@@ -145,7 +145,7 @@ function vInicio(){
       <div class="i-lbl i-lbl-dk">Casos en ruta</div>
     </button>
   </div>`;
-  const info=`<div class="info-panel${S.infoOpen?' info-open':''}">
+  const info=`<div class="info-panel" style="display:${S.infoOpen?'flex':'none'}">
     <div class="aj-row">Nuevas por día <span><button class="btn btn-g btn-sm" onclick="setNuevas(-5)">−</button> <b>${cf.nuevas}</b> <button class="btn btn-g btn-sm" onclick="setNuevas(5)">+</button></span></div>
     <button class="lnk" onclick="pedirArchivo()">📥 Importar o actualizar material</button>
     <button class="lnk" onclick="resetProgreso()">↺ Reiniciar progreso de tarjetas</button>
